@@ -104,6 +104,8 @@ var weatherController = (function( modelCtrl, viewCtrl ){
             }
 
             curDay = day;
+
+            console.log(day);
             
         });
 
