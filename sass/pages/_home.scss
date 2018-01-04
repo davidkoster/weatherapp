@@ -1,0 +1,117 @@
+.current-weather {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    background-image: linear-gradient(to bottom, $grey-light-1, $grey-light-2);
+    &.night{
+        background-image: linear-gradient(to bottom, $primary-6, $primary-7);
+    }
+    &__search {
+        padding-top: 10vh;
+        z-index: 3;
+        opacity: 0;
+        visibility: hidden;
+        
+        transition: all .3s;
+        &.active {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+    &__input {
+        display: block;
+        background: none;
+        width: 80vw;
+        margin: 0 auto;
+        font-size: 4rem;
+        color: $primary-4;
+        text-align: center;
+        font-weight: 100;
+        border: none;
+        border-bottom: 1px solid currentColor;
+        padding-bottom: 1rem;
+
+        transition: all .2s;
+        &:focus {
+            outline: none;
+            color: $primary-2;
+        }
+        &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+            color: $primary-4;
+        }
+        &::-moz-placeholder { /* Firefox 19+ */
+            color: $primary-4;
+        }
+        &:-ms-input-placeholder { /* IE 10+ */
+            color: $primary-4;
+        }
+        &:-moz-placeholder { /* Firefox 18- */
+            color: $primary-4;
+        }
+    }
+    &__button {
+        //text-align: center;
+        font-size: 2rem;
+        color: $primary-2;
+        font-weight: 300;
+        display: none;
+        padding: 1rem;
+        margin: 0 auto;
+        border: none;
+        background-color:transparent;
+        //box-shadow: 0 2px 3rem rgba(0,0,0,.05);
+        border-radius: 4px;
+        transform: translateY(1rem);
+        &:focus {
+            outline: none;
+        }
+        &.active {
+            display: block;
+        }
+    }
+    &__text {
+        opacity: 0;
+        visibility: hidden;
+        z-index: 1;
+        padding-top: 3rem;
+        position: fixed;
+        top: 0;
+        width: 100%;
+
+        &.active {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+    &__error {
+        display: none;
+    }
+}
+
+
+.current-weather-details{
+    display: none;
+    height: 100vh;
+    background-image: linear-gradient(to bottom, $grey-light-2, $grey-light-1);
+    position: relative;
+    z-index: 10;
+
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 100;
+    color: $primary-1;
+
+    > * {
+
+        padding: 2rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &:not(:last-child) {
+            border-bottom: 1px solid rgba(255,255,255,.5);
+
+        }
+    }
+}
+

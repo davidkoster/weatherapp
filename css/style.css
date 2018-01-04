@@ -1,0 +1,533 @@
+/*
+Resets
+*/
+*, *::after, *::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; }
+
+html {
+  font-size: 62.5%; }
+
+body {
+  box-sizing: border-box; }
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  line-height: 1.7; }
+
+.heading-primary {
+  font-size: 6.5rem;
+  font-weight: 100;
+  color: #5677AF; }
+
+.heading-secondary {
+  font-size: 4rem;
+  font-weight: 100;
+  color: #7193C8; }
+
+.heading-tertiary {
+  font-size: 2.5rem;
+  font-weight: 100;
+  color: #7193C8; }
+
+.u-text-center {
+  text-align: center; }
+
+.u-margin-top-sm {
+  margin-top: 1.5rem; }
+
+.u-margin-top-md {
+  margin-top: 3rem; }
+
+@keyframes clearAnimation {
+  0% {
+    z-index: -1;
+    transform: translateY(70vh); }
+  99% {
+    z-index: -1; }
+  100% {
+    z-index: 6;
+    transform: translateY(0); } }
+
+@keyframes moveLeft {
+  0% {
+    transform: translateX(70vw); }
+  100% {
+    transform: translateX(0); } }
+
+@keyframes moveRight {
+  0% {
+    transform: translateX(-70vw); }
+  100% {
+    transform: translateX(0); } }
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0; }
+  50% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
+@keyframes lightnning {
+  0% {
+    opacity: 0; }
+  20% {
+    opacity: 1; }
+  30% {
+    opacity: 0; }
+  90% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@keyframes lightnning2 {
+  0% {
+    opacity: 0; }
+  30% {
+    opacity: 0; }
+  40% {
+    opacity: 1; }
+  50% {
+    opacity: 1; }
+  90% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@keyframes fog-1 {
+  0% {
+    transform: translateX(0); }
+  50% {
+    transform: translateX(-3rem);
+    transform: translateY(1rem); }
+  100% {
+    transform: translateX(0); } }
+
+@keyframes fog-2 {
+  0% {
+    transform: translateX(0); }
+  50% {
+    transform: translateX(2rem);
+    transform: translateY(-1rem); }
+  100% {
+    transform: translateX(0); } }
+
+@keyframes fog-3 {
+  0% {
+    transform: translateX(0); }
+  50% {
+    transform: translateX(2rem);
+    transform: translateY(-1rem); }
+  100% {
+    transform: translateX(0); } }
+
+@keyframes raining {
+  0% {
+    opacity: 0; }
+  50% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
+@keyframes windows {
+  0% {
+    opacity: 0; }
+  3% {
+    opacity: 0; }
+  5% {
+    opacity: .6; }
+  7% {
+    opacity: 0; }
+  23% {
+    opacity: 0; }
+  25% {
+    opacity: .4; }
+  27% {
+    opacity: 0; }
+  33% {
+    opacity: 0; }
+  35% {
+    opacity: .6; }
+  37% {
+    opacity: 0; }
+  48% {
+    opacity: 0; }
+  50% {
+    opacity: .8; }
+  52% {
+    opacity: 0; }
+  54% {
+    opacity: 0; }
+  56% {
+    opacity: .7; }
+  58% {
+    opacity: 0; }
+  72% {
+    opacity: 0; }
+  74% {
+    opacity: 1; }
+  76% {
+    opacity: 0; }
+  83% {
+    opacity: 0; }
+  85% {
+    opacity: .5; }
+  87% {
+    opacity: 0; }
+  100% {
+    opacity: 0; } }
+
+.animation {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 63vh;
+  z-index: 5; }
+  .animation__weather {
+    text-align: center;
+    z-index: 6;
+    position: relative; }
+  .animation__weather--01d, .animation__weather--01n {
+    animation: clearAnimation 1s cubic-bezier(0.17, 0.67, 0.34, 1.18);
+    animation-fill-mode: backwards; }
+  .animation__weather--02d #Weather-App > g > g:nth-child(1) > g, .animation__weather--02n #Weather-App > g > g:nth-child(1) > g {
+    opacity: 0;
+    animation: fadeIn 1s .5s;
+    animation-fill-mode: forwards; }
+  .animation__weather--02d #Weather-App > g > g:nth-child(2) > g > path, .animation__weather--02n #Weather-App > g > g:nth-child(2) > g > path {
+    transform: translateX(-70vw);
+    animation: moveRight 1s ease-out;
+    animation-fill-mode: forwards; }
+  .animation__weather--02d #Weather-App > g > g:nth-child(3) > g > path, .animation__weather--02n #Weather-App > g > g:nth-child(3) > g > path {
+    transform: translateX(70vw);
+    animation: moveLeft 1s ease-out;
+    animation-fill-mode: forwards; }
+  .animation__weather--03d #Weather-App > g > g:nth-child(1) > g, .animation__weather--03n #Weather-App > g > g:nth-child(1) > g {
+    opacity: 0;
+    animation: fadeIn 1s .5s;
+    animation-fill-mode: forwards; }
+  .animation__weather--03d #Weather-App > g > g:nth-child(2) > g > path, .animation__weather--03n #Weather-App > g > g:nth-child(2) > g > path {
+    transform: translateX(-70vw);
+    animation: moveRight 1s ease-out;
+    animation-fill-mode: forwards; }
+  .animation__weather--03d #Weather-App > g > g:nth-child(3) > g > path, .animation__weather--03n #Weather-App > g > g:nth-child(3) > g > path {
+    transform: translateX(70vw);
+    animation: moveLeft 1s ease-out;
+    animation-fill-mode: forwards; }
+  .animation__weather--03d #Weather-App > g > g:nth-child(4) > g > path, .animation__weather--03n #Weather-App > g > g:nth-child(4) > g > path {
+    transform: translateX(70vw);
+    animation: moveLeft 1s .3s ease-out;
+    animation-fill-mode: forwards; }
+  .animation__weather--04d #Weather-App > g > g:nth-child(1) > g > path, .animation__weather--04n #Weather-App > g > g:nth-child(1) > g > path {
+    transform: translateX(-70vw);
+    animation: moveRight 1s ease-out;
+    animation-fill-mode: forwards; }
+  .animation__weather--04d #Weather-App > g > g:nth-child(2) > g > path, .animation__weather--04n #Weather-App > g > g:nth-child(2) > g > path {
+    transform: translateX(70vw);
+    animation: moveLeft 1s ease-out;
+    animation-fill-mode: forwards; }
+  .animation__weather--04d #Weather-App > g > g:nth-child(3) > g > path, .animation__weather--04n #Weather-App > g > g:nth-child(3) > g > path {
+    transform: translateX(70vw);
+    animation: moveLeft 1s .3s ease-out;
+    animation-fill-mode: forwards; }
+  .animation__weather--09d #Weather-App > g > g:nth-child(1) > g, .animation__weather--09n #Weather-App > g > g:nth-child(1) > g {
+    opacity: 0;
+    animation: fadeIn .5s ease-out 5;
+    animation-direction: alternate;
+    animation-fill-mode: forwards; }
+    .animation__weather--09d #Weather-App > g > g:nth-child(1) > g:nth-child(1), .animation__weather--09n #Weather-App > g > g:nth-child(1) > g:nth-child(1) {
+      animation-delay: 2s; }
+    .animation__weather--09d #Weather-App > g > g:nth-child(1) > g:nth-child(2), .animation__weather--09n #Weather-App > g > g:nth-child(1) > g:nth-child(2) {
+      animation-delay: 1.6s; }
+    .animation__weather--09d #Weather-App > g > g:nth-child(1) > g:nth-child(3), .animation__weather--09n #Weather-App > g > g:nth-child(1) > g:nth-child(3) {
+      animation-delay: 1.8s; }
+  .animation__weather--09d #Weather-App > g > g:nth-child(2) > g, .animation__weather--09n #Weather-App > g > g:nth-child(2) > g {
+    opacity: 0;
+    animation: fadeIn .5s ease-out 5;
+    animation-direction: alternate;
+    animation-fill-mode: forwards; }
+    .animation__weather--09d #Weather-App > g > g:nth-child(2) > g:nth-child(1), .animation__weather--09n #Weather-App > g > g:nth-child(2) > g:nth-child(1) {
+      animation-delay: 1.2s; }
+    .animation__weather--09d #Weather-App > g > g:nth-child(2) > g:nth-child(2), .animation__weather--09n #Weather-App > g > g:nth-child(2) > g:nth-child(2) {
+      animation-delay: 1.5s; }
+    .animation__weather--09d #Weather-App > g > g:nth-child(2) > g:nth-child(3), .animation__weather--09n #Weather-App > g > g:nth-child(2) > g:nth-child(3) {
+      animation-delay: 2s; }
+  .animation__weather--09d #Weather-App > g > g:nth-child(3) > g > path, .animation__weather--09n #Weather-App > g > g:nth-child(3) > g > path {
+    transform: translateX(-70vw);
+    animation: moveRight 1s ease-out;
+    animation-fill-mode: forwards; }
+  .animation__weather--09d #Weather-App > g > g:nth-child(4) > g > path, .animation__weather--09n #Weather-App > g > g:nth-child(4) > g > path {
+    transform: translateX(70vw);
+    animation: moveLeft 1s ease-out;
+    animation-fill-mode: forwards; }
+  .animation__weather--09d #Weather-App > g > g:nth-child(5) > g > path, .animation__weather--09n #Weather-App > g > g:nth-child(5) > g > path {
+    transform: translateX(70vw);
+    animation: moveLeft 1s .3s ease-out;
+    animation-fill-mode: forwards; }
+  .animation__weather--10d #Weather-App > g > g:nth-child(1) > g > g, .animation__weather--10n #Weather-App > g > g:nth-child(1) > g > g, .animation__weather--13d #Weather-App > g > g:nth-child(1) > g > g, .animation__weather--13n #Weather-App > g > g:nth-child(1) > g > g {
+    opacity: 0;
+    animation: fadeIn .5s ease-out 5;
+    animation-direction: alternate;
+    animation-fill-mode: forwards; }
+    .animation__weather--10d #Weather-App > g > g:nth-child(1) > g > g:nth-child(1), .animation__weather--10n #Weather-App > g > g:nth-child(1) > g > g:nth-child(1), .animation__weather--13d #Weather-App > g > g:nth-child(1) > g > g:nth-child(1), .animation__weather--13n #Weather-App > g > g:nth-child(1) > g > g:nth-child(1) {
+      animation-delay: 1.1s; }
+    .animation__weather--10d #Weather-App > g > g:nth-child(1) > g > g:nth-child(2), .animation__weather--10n #Weather-App > g > g:nth-child(1) > g > g:nth-child(2), .animation__weather--13d #Weather-App > g > g:nth-child(1) > g > g:nth-child(2), .animation__weather--13n #Weather-App > g > g:nth-child(1) > g > g:nth-child(2) {
+      animation-delay: 2s; }
+    .animation__weather--10d #Weather-App > g > g:nth-child(1) > g > g:nth-child(3), .animation__weather--10n #Weather-App > g > g:nth-child(1) > g > g:nth-child(3), .animation__weather--13d #Weather-App > g > g:nth-child(1) > g > g:nth-child(3), .animation__weather--13n #Weather-App > g > g:nth-child(1) > g > g:nth-child(3) {
+      animation-delay: 1.1s; }
+    .animation__weather--10d #Weather-App > g > g:nth-child(1) > g > g:nth-child(4), .animation__weather--10n #Weather-App > g > g:nth-child(1) > g > g:nth-child(4), .animation__weather--13d #Weather-App > g > g:nth-child(1) > g > g:nth-child(4), .animation__weather--13n #Weather-App > g > g:nth-child(1) > g > g:nth-child(4) {
+      animation-delay: 1.2s; }
+    .animation__weather--10d #Weather-App > g > g:nth-child(1) > g > g:nth-child(5), .animation__weather--10n #Weather-App > g > g:nth-child(1) > g > g:nth-child(5), .animation__weather--13d #Weather-App > g > g:nth-child(1) > g > g:nth-child(5), .animation__weather--13n #Weather-App > g > g:nth-child(1) > g > g:nth-child(5) {
+      animation-delay: 1.3s; }
+    .animation__weather--10d #Weather-App > g > g:nth-child(1) > g > g:nth-child(6), .animation__weather--10n #Weather-App > g > g:nth-child(1) > g > g:nth-child(6), .animation__weather--13d #Weather-App > g > g:nth-child(1) > g > g:nth-child(6), .animation__weather--13n #Weather-App > g > g:nth-child(1) > g > g:nth-child(6) {
+      animation-delay: 1.1s; }
+    .animation__weather--10d #Weather-App > g > g:nth-child(1) > g > g:nth-child(7), .animation__weather--10n #Weather-App > g > g:nth-child(1) > g > g:nth-child(7), .animation__weather--13d #Weather-App > g > g:nth-child(1) > g > g:nth-child(7), .animation__weather--13n #Weather-App > g > g:nth-child(1) > g > g:nth-child(7) {
+      animation-delay: 1.9s; }
+  .animation__weather--10d #Weather-App > g > g:nth-child(2) > g > g, .animation__weather--10n #Weather-App > g > g:nth-child(2) > g > g, .animation__weather--13d #Weather-App > g > g:nth-child(2) > g > g, .animation__weather--13n #Weather-App > g > g:nth-child(2) > g > g {
+    opacity: 0;
+    animation: fadeIn .5s ease-out 5;
+    animation-direction: alternate;
+    animation-fill-mode: forwards; }
+    .animation__weather--10d #Weather-App > g > g:nth-child(2) > g > g:nth-child(1), .animation__weather--10n #Weather-App > g > g:nth-child(2) > g > g:nth-child(1), .animation__weather--13d #Weather-App > g > g:nth-child(2) > g > g:nth-child(1), .animation__weather--13n #Weather-App > g > g:nth-child(2) > g > g:nth-child(1) {
+      animation-delay: 1.5s; }
+    .animation__weather--10d #Weather-App > g > g:nth-child(2) > g > g:nth-child(2), .animation__weather--10n #Weather-App > g > g:nth-child(2) > g > g:nth-child(2), .animation__weather--13d #Weather-App > g > g:nth-child(2) > g > g:nth-child(2), .animation__weather--13n #Weather-App > g > g:nth-child(2) > g > g:nth-child(2) {
+      animation-delay: 1.6s; }
+    .animation__weather--10d #Weather-App > g > g:nth-child(2) > g > g:nth-child(3), .animation__weather--10n #Weather-App > g > g:nth-child(2) > g > g:nth-child(3), .animation__weather--13d #Weather-App > g > g:nth-child(2) > g > g:nth-child(3), .animation__weather--13n #Weather-App > g > g:nth-child(2) > g > g:nth-child(3) {
+      animation-delay: 1.8s; }
+    .animation__weather--10d #Weather-App > g > g:nth-child(2) > g > g:nth-child(4), .animation__weather--10n #Weather-App > g > g:nth-child(2) > g > g:nth-child(4), .animation__weather--13d #Weather-App > g > g:nth-child(2) > g > g:nth-child(4), .animation__weather--13n #Weather-App > g > g:nth-child(2) > g > g:nth-child(4) {
+      animation-delay: 1.7s; }
+    .animation__weather--10d #Weather-App > g > g:nth-child(2) > g > g:nth-child(5), .animation__weather--10n #Weather-App > g > g:nth-child(2) > g > g:nth-child(5), .animation__weather--13d #Weather-App > g > g:nth-child(2) > g > g:nth-child(5), .animation__weather--13n #Weather-App > g > g:nth-child(2) > g > g:nth-child(5) {
+      animation-delay: 1.1s; }
+    .animation__weather--10d #Weather-App > g > g:nth-child(2) > g > g:nth-child(6), .animation__weather--10n #Weather-App > g > g:nth-child(2) > g > g:nth-child(6), .animation__weather--13d #Weather-App > g > g:nth-child(2) > g > g:nth-child(6), .animation__weather--13n #Weather-App > g > g:nth-child(2) > g > g:nth-child(6) {
+      animation-delay: 1.3s; }
+    .animation__weather--10d #Weather-App > g > g:nth-child(2) > g > g:nth-child(7), .animation__weather--10n #Weather-App > g > g:nth-child(2) > g > g:nth-child(7), .animation__weather--13d #Weather-App > g > g:nth-child(2) > g > g:nth-child(7), .animation__weather--13n #Weather-App > g > g:nth-child(2) > g > g:nth-child(7) {
+      animation-delay: 1.6s; }
+  .animation__weather--10d #Weather-App > g > g:nth-child(3) > g > path, .animation__weather--10n #Weather-App > g > g:nth-child(3) > g > path, .animation__weather--13d #Weather-App > g > g:nth-child(3) > g > path, .animation__weather--13n #Weather-App > g > g:nth-child(3) > g > path {
+    transform: translateX(-70vw);
+    animation: moveRight 1s ease-out;
+    animation-fill-mode: forwards; }
+  .animation__weather--10d #Weather-App > g > g:nth-child(4) > g > path, .animation__weather--10n #Weather-App > g > g:nth-child(4) > g > path, .animation__weather--13d #Weather-App > g > g:nth-child(4) > g > path, .animation__weather--13n #Weather-App > g > g:nth-child(4) > g > path {
+    transform: translateX(70vw);
+    animation: moveLeft 1s ease-out;
+    animation-fill-mode: forwards; }
+  .animation__weather--10d #Weather-App > g > g:nth-child(5) > g > path, .animation__weather--10n #Weather-App > g > g:nth-child(5) > g > path, .animation__weather--13d #Weather-App > g > g:nth-child(5) > g > path, .animation__weather--13n #Weather-App > g > g:nth-child(5) > g > path {
+    transform: translateX(70vw);
+    animation: moveLeft 1s .3s ease-out;
+    animation-fill-mode: forwards; }
+  .animation__weather--11d #Weather-App > g > g:nth-child(1), .animation__weather--11n #Weather-App > g > g:nth-child(1) {
+    opacity: 0;
+    animation: lightnning .8s 1.5s ease-out 3;
+    animation-direction: alternate;
+    animation-fill-mode: forwards; }
+  .animation__weather--11d #Weather-App > g > g:nth-child(2), .animation__weather--11n #Weather-App > g > g:nth-child(2) {
+    opacity: 0;
+    animation: lightnning2 .8s 1.2s ease-out 3;
+    animation-direction: alternate;
+    animation-fill-mode: forwards; }
+  .animation__weather--11d #Weather-App > g > g:nth-child(3) > g > path, .animation__weather--11n #Weather-App > g > g:nth-child(3) > g > path {
+    transform: translateX(-70vw);
+    animation: moveRight 1s ease-out;
+    animation-fill-mode: forwards; }
+  .animation__weather--11d #Weather-App > g > g:nth-child(4) > g > path, .animation__weather--11n #Weather-App > g > g:nth-child(4) > g > path {
+    transform: translateX(70vw);
+    animation: moveLeft 1s ease-out;
+    animation-fill-mode: forwards; }
+  .animation__weather--11d #Weather-App > g > g:nth-child(5) > g > path, .animation__weather--11n #Weather-App > g > g:nth-child(5) > g > path {
+    transform: translateX(70vw);
+    animation: moveLeft 1s .3s ease-out;
+    animation-fill-mode: forwards; }
+  .animation__weather--50d #Weather-App > g > g:nth-child(1) > g > path, .animation__weather--50n #Weather-App > g > g:nth-child(1) > g > path {
+    transform: translateX(-70vw);
+    animation: moveRight 1s ease-out;
+    animation-fill-mode: forwards; }
+  .animation__weather--50d #Weather-App > g > g:nth-child(2) > g > path, .animation__weather--50n #Weather-App > g > g:nth-child(2) > g > path {
+    transform: translateX(70vw);
+    animation: moveLeft 1s ease-out;
+    animation-fill-mode: forwards; }
+  .animation__weather--50d #Weather-App > g > g:nth-child(3) > g > path, .animation__weather--50n #Weather-App > g > g:nth-child(3) > g > path {
+    transform: translateX(70vw);
+    animation: moveLeft 1s .3s ease-out;
+    animation-fill-mode: forwards; }
+  .animation__weather--50n, .animation__weather--50d {
+    padding-top: 30vh; }
+    .animation__weather--50n #fog > g:nth-child(1) > g, .animation__weather--50n #fog-n > g:nth-child(1) > g, .animation__weather--50d #fog > g:nth-child(1) > g, .animation__weather--50d #fog-n > g:nth-child(1) > g {
+      animation: moveRight 1s ease-out;
+      animation-fill-mode: backwards; }
+    .animation__weather--50n #fog > g:nth-child(2) > g, .animation__weather--50n #fog-n > g:nth-child(2) > g, .animation__weather--50d #fog > g:nth-child(2) > g, .animation__weather--50d #fog-n > g:nth-child(2) > g {
+      animation: moveLeft 1s ease-out;
+      animation-fill-mode: backwards; }
+  .animation__background {
+    width: 100%;
+    position: absolute;
+    bottom: 0; }
+    .animation__background .window--1, .animation__background .window--3 {
+      transform: translateZ(0); }
+
+.rain-chance__icon {
+  width: 5rem;
+  height: 5rem;
+  fill: currentColor;
+  margin-right: 2rem; }
+
+.sunrise-sunset svg[class^="sunrise-sunset__icon"] {
+  width: 7rem;
+  height: 7rem;
+  fill: currentColor;
+  margin-right: 2rem; }
+
+.wind__icon {
+  width: 5rem;
+  height: 5rem;
+  fill: currentColor;
+  margin-right: 2rem; }
+
+.day-navigation {
+  height: 8rem;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-evenly;
+  z-index: 10;
+  color: #5677AF;
+  font-size: 1.5rem;
+  font-weight: 100;
+  background-image: linear-gradient(to right, #f8f8f8, #efefef); }
+  .day-navigation__day {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 1rem; }
+    .day-navigation__day--current {
+      background-image: linear-gradient(to right, #5677AF, #7193C8);
+      color: #f8f8f8; }
+  .day-navigation__icon {
+    width: 3rem;
+    height: 3rem;
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat; }
+    .day-navigation__icon--01 {
+      background-image: url(../img/animation/weather/icon-01.svg); }
+    .day-navigation__icon--02 {
+      background-image: url(../img/animation/weather/icon-02.svg); }
+    .day-navigation__icon--03 {
+      background-image: url(../img/animation/weather/icon-03.svg); }
+    .day-navigation__icon--04 {
+      background-image: url(../img/animation/weather/icon-04.svg); }
+    .day-navigation__icon--09 {
+      background-image: url(../img/animation/weather/icon-09.svg); }
+    .day-navigation__icon--10 {
+      background-image: url(../img/animation/weather/icon-10.svg); }
+    .day-navigation__icon--11 {
+      background-image: url(../img/animation/weather/icon-11.svg); }
+    .day-navigation__icon--13 {
+      background-image: url(../img/animation/weather/icon-13.svg); }
+    .day-navigation__icon--50 {
+      background-image: url(../img/animation/weather/icon-50.svg); }
+
+.current-weather {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background-image: linear-gradient(to bottom, #efefef, #f8f8f8); }
+  .current-weather.night {
+    background-image: linear-gradient(to bottom, #2C3C59, #25344D); }
+  .current-weather__search {
+    padding-top: 10vh;
+    z-index: 3;
+    opacity: 0;
+    visibility: hidden;
+    transition: all .3s; }
+    .current-weather__search.active {
+      opacity: 1;
+      visibility: visible; }
+  .current-weather__input {
+    display: block;
+    background: none;
+    width: 80vw;
+    margin: 0 auto;
+    font-size: 4rem;
+    color: #98B6DF;
+    text-align: center;
+    font-weight: 100;
+    border: none;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 1rem;
+    transition: all .2s; }
+    .current-weather__input:focus {
+      outline: none;
+      color: #5677AF; }
+    .current-weather__input::-webkit-input-placeholder {
+      /* Chrome/Opera/Safari */
+      color: #98B6DF; }
+    .current-weather__input::-moz-placeholder {
+      /* Firefox 19+ */
+      color: #98B6DF; }
+    .current-weather__input:-ms-input-placeholder {
+      /* IE 10+ */
+      color: #98B6DF; }
+    .current-weather__input:-moz-placeholder {
+      /* Firefox 18- */
+      color: #98B6DF; }
+  .current-weather__button {
+    font-size: 2rem;
+    color: #5677AF;
+    font-weight: 300;
+    display: none;
+    padding: 1rem;
+    margin: 0 auto;
+    border: none;
+    background-color: transparent;
+    border-radius: 4px;
+    transform: translateY(1rem); }
+    .current-weather__button:focus {
+      outline: none; }
+    .current-weather__button.active {
+      display: block; }
+  .current-weather__text {
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1;
+    padding-top: 3rem;
+    position: fixed;
+    top: 0;
+    width: 100%; }
+    .current-weather__text.active {
+      opacity: 1;
+      visibility: visible; }
+  .current-weather__error {
+    display: none; }
+
+.current-weather-details {
+  display: none;
+  height: 100vh;
+  background-image: linear-gradient(to bottom, #f8f8f8, #efefef);
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 100;
+  color: #375486; }
+  .current-weather-details > * {
+    padding: 2rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+    .current-weather-details > *:not(:last-child) {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.5); }
