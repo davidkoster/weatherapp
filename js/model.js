@@ -28,7 +28,10 @@ var weatherModelController = (function(){
 
     
 
-
+    const keys = {
+        openWeather: 'b34e9c1fd875ac948d81551fd8bc6c02',
+        google: 'AIzaSyCxRruRUdKgB4lFtfkq-hUHM6YeFoTOQ6U',
+    }
 
     let weatherDays = [];
 
