@@ -1,4 +1,7 @@
 .day-navigation {
+    // visibility: hidden;
+    // opacity: 0;
+
     height: 8rem;
     width: 100%;
     position: absolute;
@@ -12,6 +15,16 @@
     font-size: 1.5rem;
     font-weight: 100;
     background-image: linear-gradient(to right, $grey-light-2, $grey-light-1);
+
+    transform: translateY(100%);
+
+    transition: all .3s ease;
+
+    &.active{
+        // visibility: visible;
+        // opacity: 1;
+        transform: translateY(0);
+    }
 
     &__day {
         flex: 1;

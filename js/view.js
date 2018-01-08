@@ -18,6 +18,7 @@ var weatherViewController = (function(){
         curWeatherBackground: '.animation__background',
         curWeatherDet: '.current-weather-details',
 
+        daysNav: '.day-navigation',
         daysNavDay: '.day-navigation__day',
         daysNavDayText: '.day-navigation__text',
         daysNavDayIcon: '.day-navigation__icon',
@@ -51,8 +52,6 @@ var weatherViewController = (function(){
         }, generateRandomNumberInRange(100, 200) );
 
     };
-
- 
 
     return {
 
@@ -96,11 +95,6 @@ var weatherViewController = (function(){
             scrollVal = $(window).scrollTop();
             screenHeight = $(window).innerHeight();
             scrollPercent = Math.round((scrollVal / screenHeight) * 20); // Get the percentage of the viewport height scrolled
-        
-            // console.log(scrollVal);
-            // console.log(screenHeight);
-            // console.log(scrollPercent);
-
 
             $(DOMStrings.curWeatherWrap).css('filter', 'blur(' + scrollPercent + 'px)'); // Increase or decrease blur
         
@@ -143,6 +137,12 @@ var weatherViewController = (function(){
 
         addNightClass: function(){
             $(DOMStrings.curWeather).addClass('night');
+            $(DOMStrings.curWeatherBackground).addClass('animation__background--night');
+        },
+
+        removeNightClass: function(){
+            $(DOMStrings.curWeather).removeClass('night');
+            $(DOMStrings.curWeatherBackground).removeClass('animation__background--night');
         },
 
         addWeatherUI: function(data){
@@ -150,13 +150,26 @@ var weatherViewController = (function(){
         },
 
         addWeatherClass: function(weatherIcon){
-            $(DOMStrings.curWeatherAnimation).addClass( 'animation__weather--' + weatherIcon );
+            $(DOMStrings.curWeatherAnimation).alterClass('animation__weather--animate-*', 'animation__weather--animate-' + weatherIcon );
+            //$(DOMStrings.curWeatherAnimation).addClass( 'animation__weather--animate-' + weatherIcon );
         },
 
         updateNavDays: function(i, el, icon){
-            $(DOMStrings.daysNavDay + ':nth-child('+ (i + 1) +') ' + DOMStrings.daysNavDayText).text(el.day);
-            $(DOMStrings.daysNavDay + ':nth-child('+ (i + 1) +') ' + DOMStrings.daysNavDayIcon).addClass('day-navigation__icon--' + icon );
-        }
+            let $curDayUI = $(DOMStrings.daysNavDay + ':nth-child('+ (i + 1) +')');
+            $curDayUI.children(DOMStrings.daysNavDayText).text(el.day);
+            $curDayUI.children(DOMStrings.daysNavDayIcon).addClass('day-navigation__icon--' + icon );
+            $curDayUI.data('id', i);
+        },
+
+        showDaysNav: function(){
+            $(DOMStrings.daysNav).addClass('active');
+        },
+
+        addActiveClassToDaysNavDay: function(el){
+            $(DOMStrings.daysNavDay).removeClass('day-navigation__day--current');
+            $(el).addClass('day-navigation__day--current');
+            return el.data('id');
+        },
         
 
     }

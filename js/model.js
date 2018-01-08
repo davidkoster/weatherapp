@@ -16,15 +16,15 @@ var weatherModelController = (function(){
 
     weatherConditions = new Map();
 
-    weatherConditions.set(weatherCond.clear, '01');
-    weatherConditions.set(weatherCond.scattered, '02');
-    weatherConditions.set(weatherCond.broken, '03');
-    weatherConditions.set(weatherCond.overcast, '04');
-    weatherConditions.set(weatherCond.drizzle, '09');
-    weatherConditions.set(weatherCond.rain, '10');
-    weatherConditions.set(weatherCond.thunderstorm , '11');
-    weatherConditions.set(weatherCond.snow, '13');
-    weatherConditions.set(weatherCond.mist, '50');
+    weatherConditions.set(weatherCond.clear, ['01', 'Clear']);
+    weatherConditions.set(weatherCond.scattered, ['02', 'Cloudy']);
+    weatherConditions.set(weatherCond.broken, ['03', 'Cloudy']);
+    weatherConditions.set(weatherCond.overcast, ['04', 'Cloudy']);
+    weatherConditions.set(weatherCond.drizzle, ['09', 'Drizzle']);
+    weatherConditions.set(weatherCond.rain, ['10', 'Rain']);
+    weatherConditions.set(weatherCond.thunderstorm , ['11', 'Thunderstorms']);
+    weatherConditions.set(weatherCond.snow, ['13', 'Snow']);
+    weatherConditions.set(weatherCond.mist, ['50', 'Mist']);
 
     
 
@@ -50,16 +50,28 @@ var weatherModelController = (function(){
             return Math.min(...this.temp);
         }
 
-        getMostFrequent(arr){
+        getMostFrequentWeather(){
+
+            //let result = null;
+
             
             let maxCount = 0; // Counter of max element
             let freqObj = {}; // Frequency object to store key(name of element in arr) value(occurences of element in arr) pairs
             let freqEl; // Store the element that occurs most frequently
 
             // Loop over arr
-            for( let i = 0, len = arr.length; i < len; i++ ){
+            for( let i = 0, len = this.weather.length; i < len; i++ ){
 
-                let el =  arr[i];
+                let el =  this.weather[i];
+
+                for (var [key, value] of weatherConditions){
+                    if(key.indexOf(el) !== -1){
+                        el = [value[0], value[1]]; // iterate over the weather conditions map element and set the weather icon to its value
+                        if(el[0] === '02' || el === '03' || el === '04' ){
+                            el[0] = '03';
+                        }
+                    }
+                }
 
                 if(freqObj[el] === undefined){ // if the element does not exist in the object
                     freqObj[el] = 1; // then add it and set its value to 1 
@@ -74,7 +86,24 @@ var weatherModelController = (function(){
 
             }
             // return the hight occuring element
+            console.log(freqEl);
             return freqEl;
+
+
+            // var getWeatherAttr = function(id, type){
+            //     let weatherConditions = modelCtrl.getWeatherConditions();
+            //     let result = null;
+            //     for (var [key, value] of weatherConditions){
+            //         if(key.indexOf(id) !== -1){
+            //             if(type === 'icon'){
+            //                 result = value[0]; // iterate over the weather conditions map element and set the weather icon to its value
+            //             } else if(type === 'desc') {
+            //                 result = value[1];
+            //             }
+            //         }
+            //     }
+            //     return result; // returns weather icon code if found else returns null
+            // }
         }
 
     }
@@ -101,6 +130,10 @@ var weatherModelController = (function(){
 
         setWeather: function(weather){
             currentWeather = weather;
+        },
+
+        updateIsNight: function(isNight){
+            currentWeather['isNight'] = isNight; 
         },
 
         getWeatherConditions: function(){
