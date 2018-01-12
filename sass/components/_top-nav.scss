@@ -1,0 +1,29 @@
+.top-nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    z-index: 300;
+
+    &__button{
+        padding: 1rem 2rem;
+        font-size: 2rem;
+        color: $primary-1;
+        background: none;
+        border: none;
+        outline: none;
+        &--night{
+            color: $grey-light-1;
+        }
+
+    }
+    &__menu-button {
+        &--active{
+            color: $grey-light-1;
+        }
+    }
+
+    
+}

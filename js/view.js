@@ -16,14 +16,32 @@ var weatherViewController = (function(){
         ErrorBlock: '.current-weather__error',
 
         curWeatherBackground: '.animation__background',
-        curWeatherDet: '.current-weather-details',
+        curWeatherDet: '.weather-forecast',
 
         daysNav: '.day-navigation',
         daysNavDay: '.day-navigation__day',
         daysNavDayText: '.day-navigation__text',
         daysNavDayIcon: '.day-navigation__icon',
 
+        mainMenu: '.main-menu',
+        mainMenuList: '.main-menu__list',
+        mainMenuItem: '.main-menu__item',
+        mainMenuBtn: '.top-nav__menu-button',
+        mainMenuListItem: '.main-menu__main-list >.main-menu__item',
+        menuItemBack: '.main-menu__item-back',
+        menuCitiesList: '.main-menu__city-list',
+        menuCitiesListItem: '.main-menu__city-list .main-menu__item',
+        menuCitiesCity: '.main-menu__item-city',
+        menuNoCitiesItem: '.main-menu__item-no-cities',
 
+        addCityBtn: '.top-nav__add-button',
+        topNavBtns: '.top-nav__button',
+ 
+        radioBox: '.radio__box',
+        radioLabel: '.radio__label',
+        radioInput: '.radio__input',
+
+        unitsInput: 'input[name=units]',
 
     }
 
@@ -53,6 +71,10 @@ var weatherViewController = (function(){
 
     };
 
+    var removeFirstChar = function(string){
+        return string.slice(1, string.length);
+    }
+
     return {
 
         getInput: function(){
@@ -78,14 +100,16 @@ var weatherViewController = (function(){
         },
 
         displayError: function(){
-            // Hide input
-            $(DOMStrings.curWeatherSearchWrap).addClass('active');
+            return function(){
+                // Hide input
+                $(DOMStrings.curWeatherSearchWrap).addClass('active');
 
-            // Display content below
-            $(DOMStrings.curWeatherWrap).removeClass('active');
-            $(DOMStrings.curWeatherDet).hide();
+                // Display content below
+                $(DOMStrings.curWeatherWrap).removeClass('active');
+                $(DOMStrings.curWeatherDet).hide();
 
-            $(DOMStrings.ErrorBlock).show();
+                $(DOMStrings.ErrorBlock).show();
+            }    
         },
 
         setWindowScrollAnimation: function(){
@@ -110,8 +134,8 @@ var weatherViewController = (function(){
         
         },
 
-        showSearch: function(){
-            if($(this).val() !== ''){
+        showSearch: function(el){
+            if(el.val() !== ''){
                 $(DOMStrings.curWeatherBtn).addClass('active');
             } else {
                 $(DOMStrings.curWeatherBtn).removeClass('active');
@@ -137,12 +161,14 @@ var weatherViewController = (function(){
 
         addNightClass: function(){
             $(DOMStrings.curWeather).addClass('night');
-            $(DOMStrings.curWeatherBackground).addClass('animation__background--night');
+            $(DOMStrings.curWeatherBackground).addClass( removeFirstChar(DOMStrings.curWeatherBackground) + '--night');
+            $(DOMStrings.topNavBtns).addClass( removeFirstChar(DOMStrings.topNavBtns) + '--night' );
         },
 
         removeNightClass: function(){
             $(DOMStrings.curWeather).removeClass('night');
-            $(DOMStrings.curWeatherBackground).removeClass('animation__background--night');
+            $(DOMStrings.curWeatherBackground).removeClass( removeFirstChar(DOMStrings.curWeatherBackground) + '--night');
+            $(DOMStrings.topNavBtns).removeClass( removeFirstChar(DOMStrings.topNavBtns) + '--night' );
         },
 
         addWeatherUI: function(data){
@@ -150,14 +176,19 @@ var weatherViewController = (function(){
         },
 
         addWeatherClass: function(weatherIcon){
-            $(DOMStrings.curWeatherAnimation).alterClass('animation__weather--animate-*', 'animation__weather--animate-' + weatherIcon );
+            $(DOMStrings.curWeatherAnimation).alterClass( removeFirstChar(DOMStrings.curWeatherAnimation)  + '--animate-*', removeFirstChar(DOMStrings.curWeatherAnimation) + '--animate-' + weatherIcon );
             //$(DOMStrings.curWeatherAnimation).addClass( 'animation__weather--animate-' + weatherIcon );
+        },
+
+        resetDaysNavActive: function(){
+            $(DOMStrings.daysNavDay).removeClass(removeFirstChar(DOMStrings.daysNavDay) + '--current');
+            $(DOMStrings.daysNavDay + ':first-child').addClass(removeFirstChar(DOMStrings.daysNavDay) + '--current');
         },
 
         updateNavDays: function(i, el, icon){
             let $curDayUI = $(DOMStrings.daysNavDay + ':nth-child('+ (i + 1) +')');
             $curDayUI.children(DOMStrings.daysNavDayText).text(el.day);
-            $curDayUI.children(DOMStrings.daysNavDayIcon).addClass('day-navigation__icon--' + icon );
+            $curDayUI.children(DOMStrings.daysNavDayIcon).alterClass( removeFirstChar(DOMStrings.daysNavDayIcon) + '--*', removeFirstChar(DOMStrings.daysNavDayIcon) + '--' + icon );
             $curDayUI.data('id', i);
         },
 
@@ -166,10 +197,59 @@ var weatherViewController = (function(){
         },
 
         addActiveClassToDaysNavDay: function(el){
-            $(DOMStrings.daysNavDay).removeClass('day-navigation__day--current');
-            $(el).addClass('day-navigation__day--current');
+            $(DOMStrings.daysNavDay).removeClass( removeFirstChar(DOMStrings.daysNavDay) + '--current' );
+            $(el).addClass( removeFirstChar(DOMStrings.daysNavDay) + '--current' );
             return el.data('id');
         },
+
+        toggleMenu: function(el){
+            $(DOMStrings.mainMenu).toggleClass( removeFirstChar(DOMStrings.mainMenu) + '--active' );
+            el.toggleClass( removeFirstChar(DOMStrings.mainMenuBtn) + '--active' );
+            $(DOMStrings.curWeather).toggleClass( removeFirstChar(DOMStrings.curWeather) + '--active' )
+        },
+
+        showSubMenu: function(el){
+            var list = el.data("list");
+
+            $(DOMStrings.mainMenu + '__main-list').addClass( removeFirstChar(DOMStrings.mainMenuList) + '--left' );
+            $(DOMStrings.mainMenu + '__' + list + '-list').removeClass( removeFirstChar(DOMStrings.mainMenuList) + '--right' );
+        },
+
+        hideSubMenu: function(el){
+            var list = el.parent().data("list");
+           
+            $(DOMStrings.mainMenu + '__main-list').removeClass( removeFirstChar(DOMStrings.mainMenuList) + '--left' );
+            $(DOMStrings.mainMenu + '__' + list + '-list').addClass( removeFirstChar(DOMStrings.mainMenuList) + '--right' );
+        },
+
+        addClassActive: function(el){
+            $(el).addClass('active');
+        },
+
+        removeClassActive: function(el){
+            $(el).removeClass('active');
+        },
+
+        clearInputVal: function(input){
+            $(input).val('');
+        },
+
+        addCitiesToMenu: function(cities){
+            let html = '';
+
+            $(`${DOMStrings.menuCitiesListItem}:not(:first-child)`).remove();
+    
+            cities.forEach(function(city){
+                html += `<li class="${removeFirstChar(DOMStrings.mainMenuItem)} ${removeFirstChar(DOMStrings.menuCitiesCity)}" data-id="${city.id}">${city.name}</li>`;
+            });
+    
+            $(DOMStrings.menuCitiesList).append(html);
+        },
+
+        getCityId: function(el){
+            return el.data('id');
+        }
+
         
 
     }

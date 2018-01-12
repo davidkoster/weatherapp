@@ -4,11 +4,36 @@
     width: 100%;
     overflow: hidden;
     background-image: linear-gradient(to bottom, $grey-light-1, $grey-light-2);
+
+    &::before {
+        content: '';
+        display: block;
+        background-image: linear-gradient(to bottom, $primary-6, $primary-7);;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        opacity: 0;
+        visibility: hidden;
+
+        //transition: all .3s;
+    }
+
     &.night{
-        background-image: linear-gradient(to bottom, $primary-6, $primary-7);
+
+        &::before {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+    }
+
+    &--active {
+        filter: blur(8px);
     }
     &__search {
-        padding-top: 10vh;
+        padding-top: 15vh;
         z-index: 3;
         opacity: 0;
         visibility: hidden;
@@ -90,7 +115,7 @@
 }
 
 
-.current-weather-details{
+.weather-forecast{
     display: none;
     height: 100vh;
     background-image: linear-gradient(to bottom, $grey-light-2, $grey-light-1);
@@ -102,16 +127,59 @@
     font-weight: 100;
     color: $primary-1;
 
-    > * {
+    &__charts {
 
         padding: 2rem 1rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        &:not(:last-child) {
-            border-bottom: 1px solid rgba(255,255,255,.5);
 
+        >svg{
+          width: 100%;  
         }
+        
+        // display: flex;
+        // align-items: center;
+        // justify-content: center;
+        // &:not(:last-child) {
+        //     border-bottom: 1px solid rgba(255,255,255,.5);
+
+        // }
     }
 }
 
+.line {
+    fill: none;
+    stroke-width: 2px;
+    &.temp {
+        stroke: orangered;
+    }
+    &.pressure {
+        stroke: steelblue;
+    }
+    &.humidity {
+        stroke: blueviolet;
+    }
+}
+
+.area {
+    &.temp {
+        fill: rgba(orangered, .8);
+    }
+    &.pressure {
+        fill: rgba(steelblue, .8);
+    }
+    &.humidity {
+        fill: rgba(blueviolet, .8);
+    }
+}
+
+.domain {
+    stroke: $primary-3;
+}
+.tick{
+    color: blue;
+    line{
+        stroke: $primary-3;
+    }
+    text{
+        fill: $primary-3;
+    }
+}

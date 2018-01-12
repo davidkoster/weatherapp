@@ -6,11 +6,17 @@
 @import "base/animations";
 
 
-@import "components/animation.scss";
-@import "components/min-max.scss";
-@import "components/rain-chance.scss";
-@import "components/sunset-sunrise.scss";
-@import "components/wind.scss";
-@import "components/day-navigation.scss";
+@import "components/animation";
+@import "components/top-nav";
+@import "components/day-navigation";
+@import "components/main-menu";
+@import "components/radio";
 
-@import "pages/home.scss";
+
+@import "components/min-max";
+@import "components/rain-chance";
+@import "components/sunset-sunrise";
+@import "components/wind";
+
+
+@import "pages/home";

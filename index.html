@@ -14,9 +14,39 @@
 <body>
     
     <main class="main-wrapper">
+        <nav class="top-nav">
+            <button class="top-nav__button top-nav__menu-button">...</button>
+            <button class="top-nav__button top-nav__add-button">+</button>
+        </nav>
+        <div class="main-menu">
+            <div class="main-menu__inner">
+                <ul class="main-menu__list main-menu__main-list">
+                    <li class="main-menu__item" data-list="city">Cities</li>
+                    <li class="main-menu__item" data-list="settings">Settings</li>
+                    <li class="main-menu__item">Login</li>
+                </ul>
+                <ul class="main-menu__list main-menu__city-list main-menu__list--right" data-list="city">
+                    <li class="main-menu__item main-menu__item-back">&lsaquo;</li>
+                    <li class="main-menu__item main-menu__item-no-cities">No Cities Added</li>
 
+                </ul>
+                <ul class="main-menu__list main-menu__settings-list main-menu__list--right" data-list="settings">
+                    <li class="main-menu__item main-menu__item-back">&lsaquo;</li>
+                    <li class="main-menu__item">
+                        <span class="main-menu__title">Units:</span>
+
+                        <div class="radio__box radio__box--metric">
+                            <input type="radio" name="units" id="units__metric" class="radio__input" value="metric"><label for="units__metric" class="radio__label radio__label--metric" data-unit="metric">Metric</label>
+        
+                            <input type="radio" name="units" id="units__imperial" class="radio__input" value="imperial"><label for="units__imperial" class="radio__label radio__label--imperial" data-unit="imperial">Imperial</label>
+                            
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
         <section class="current-weather">
-
+    
             <div class="current-weather__search active">
                 <input type="text" class="current-weather__input" placeholder="Type City">
                 <button class="current-weather__button">Search</button>
@@ -65,13 +95,11 @@
             </div>
 
         </section>
-        <section class="current-weather-details">
+        <!-- <section class="weather-forecast">
 
-            <h3 class="heading-tertiary">Raining</h3>
-            <div class="min-max">
-                <span class="min-max__min">&dArr; 18&deg;c</span><span class="min-max__max">30&deg;c &uArr;</span>
-            </div>
-            <div class="rain-chance">
+            <h3 class="heading-tertiary">Forecast</h3>
+            <div class="weather-forecast__charts"></div>
+            <!-- <div class="rain-chance">
                 <svg class="rain-chance__icon">
                     <use xlink:href="img/sprite.svg#icon-rainy2"></use>
                 </svg>
@@ -99,13 +127,16 @@
                 <span class="wind__direction">N/E</span>
             </div>
 
-        </section>
+        </section> -->
 
     </main>
 
     <script src="js/vendors/jquery.min.js"></script>
     <script src="js/vendors/jquery.alterclass.js"></script>
     <script src="js/vendors/luxon.min.js"></script>
+    <script src="js/vendors/d3.min.js"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxRruRUdKgB4lFtfkq-hUHM6YeFoTOQ6U&libraries=places"></script>
 
     <script src="js/model.js"></script>
     <script src="js/view.js"></script>

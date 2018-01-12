@@ -2,6 +2,25 @@ var weatherController = (function( modelCtrl, viewCtrl ){
 
     var DOMStrings = viewCtrl.getDOMStrings(); //Get all DOM elements from the view Ctrl
 
+    var arrLoop = function(fn, arr){
+        let el = null;
+        for(var i=0; i<arr.length; i++){
+            el = fn(arr[i]);
+        }
+        return el;
+    }
+
+    // Loop over an arr of objs and return the obj with matching property and value
+    // if not found return -1
+    var getObjInArr = function(arr, prop, val){
+        let i = arr.findIndex(el => el[prop] === val);
+        if(i === -1){
+            return -1;
+        } else {
+            return arr[i];
+        } 
+    }
+
     var getMostFrequent = function(arr){
             
         let maxCount = 0; // Counter of max element
@@ -29,19 +48,7 @@ var weatherController = (function( modelCtrl, viewCtrl ){
         return freqEl;
     };
 
-    var clearInput = function (input){
-        $(input).on('focus', viewCtrl.clearInput); // On focus clear the serch input
-    }; 
-
-    var showSearch = function (){
-        $(DOMStrings.curWeatherInput).on('keyup', viewCtrl.showSearch ); // Show the search submit button on keyup if there is text in the search iinput
-    };
-
-    var animatePlaceHolder =  function() {
-        viewCtrl.placeholderAnimate( DOMStrings.curWeatherInput , 'Type City'); // Animate input placeholder text
-    };
-
-    // Function for converting single digit numbers to two digits ( eg. 1 to 01 )
+     // Function for converting single digit numbers to two digits ( eg. 1 to 01 )
     // Takes an int and adds a O to the start. The last two characters are then sliced and returned
     // Note this returns a String not and Int
     var convert2Dig = function(int){
@@ -73,6 +80,61 @@ var weatherController = (function( modelCtrl, viewCtrl ){
     var getLocalTime = function(time, timeZone){
         return DateTime.fromMillis( time, { zone: timeZone } );
     }
+
+    var clearInput = function (input){
+        $(input).on('focus', viewCtrl.clearInput); // On focus clear the serch input
+    };
+
+    var setSettingsUnitsUI = function(){
+        let unit = modelCtrl.getSettings().unit;
+        $('#units__' + unit).prop("checked", true);
+    };
+
+    var animatePlaceHolder =  function() {
+        viewCtrl.placeholderAnimate( DOMStrings.curWeatherInput , 'Type City'); // Animate input placeholder text
+    };
+
+    var animateMainMenu = function(){
+        viewCtrl.toggleMenu($(this));
+    };
+
+    var showSubMenu = function(){
+        viewCtrl.showSubMenu($(this));
+    }
+
+    var hideSubMenu = function(){
+        viewCtrl.hideSubMenu($(this));
+    }
+
+    var onRadioChange = function(){
+        let units = $( `${DOMStrings.unitsInput}:checked`).val();
+        modelCtrl.setSettings('unit', units);
+        ctrlAddCityWeather();
+    }
+
+
+
+    var addNewCity = function(){
+        //clear the city input
+        viewCtrl.clearInputVal(DOMStrings.curWeatherInput);
+
+        //animate the placeholder
+        animatePlaceHolder();
+
+        //remove current weather
+        $(DOMStrings.curWeatherAnimation).html('');
+
+        //hide Day weather forecast
+        viewCtrl.removeClassActive(DOMStrings.daysNav);
+
+        //hide weather info
+        viewCtrl.removeClassActive(DOMStrings.curWeatherWrap);
+
+        //show search bar
+        viewCtrl.addClassActive(DOMStrings.curWeatherSearchWrap);
+    }
+
+   
 
     // Updates the text UI elements for current weather
     var updateCurWeatherUI = function(temp, desc){
@@ -117,7 +179,13 @@ var weatherController = (function( modelCtrl, viewCtrl ){
     // Updates the UI in the days navigation
     // Takes the data response object from the forecast api request, current day and the timezone
     var updateDaysNav = function(data, currentDay, timeZone){
-    
+
+        // Reset the weather days arr to an empty arr
+        modelCtrl.resetWeatherDays();
+        
+        // reset the current day highlighted in the days nav to the first nav
+        viewCtrl.resetDaysNavActive();
+
         let day, curDay, time, temp, weather, weatherDay, icon;
         let days = [];
         let tempArr = [];
@@ -125,7 +193,6 @@ var weatherController = (function( modelCtrl, viewCtrl ){
 
         // loop over data list elements which are a forecast of 3 hour intervals
         data.list.forEach(function(el, i){
-
             temp = el.main.temp;
             weather = el.weather[0].id;
             time = DateTime.fromMillis( el.dt * 1000 );
@@ -152,48 +219,96 @@ var weatherController = (function( modelCtrl, viewCtrl ){
         });
 
         let weatherDays = modelCtrl.getWeatherDays();
-
+        //console.log(weatherDays);
         weatherDays.forEach(function(el, i){
             if(el.day === currentDay){
                 icon = getWeatherAttr( modelCtrl.getWeather().weather[0].id, 'icon' );
+                //console.log(icon);
             } else {
                 icon = el.getMostFrequentWeather()[0];
             }
+            //console.log(`icon: ${icon}`);
+            //console.log(`day: ${i}`);
             viewCtrl.updateNavDays(i, el, icon);
         });
 
     }
 
-    
+    var getCity = function(){
+        let input = document.querySelector('.current-weather__input'); //select the city search input
+        let autocomplete = new google.maps.places.Autocomplete(input); //add new Autocomplete object and ssign to search input
+        autocomplete.addListener('place_changed', cityAutocomplete); // add event listener for when city is selected
+
+        function cityAutocomplete(){
+            let place = autocomplete.getPlace(); //Get the place object
+
+            let city, lon, lat;
+            city = place.address_components[0].long_name;
+            lon = place.geometry.location.lng();
+            lat = place.geometry.location.lat();
+            id = place.id;
+
+            let newCity = modelCtrl.addCity(id, city, lon, lat); // Create new city obj and assign id(google place id), city(short name), lon and lat
+            
+            modelCtrl.setCurrentCity(id); //set current city to 'current'
+
+        }
+
+    }
+
+    var onSearchType = function(){
+        viewCtrl.showSearch($(this)); // Show the search submit button on keyup if there is text in the search input
+    }
+
+    var addCitiesToMenu = function(){
+        
+        let cities = modelCtrl.getAllCities(); // get all cities
+
+        viewCtrl.addCitiesToMenu(cities); // add all the cities to the menu UI
+  
+    }
+
+    var menuCityLoadWeather = function(){
+        let id, cities;
+        //Get the id from the clicked item
+        id = viewCtrl.getCityId($(this));
+
+        // Update the current city in cities arr
+        modelCtrl.setCurrentCity(id); //set current city to 'current'
+
+        // load the new weather
+        ctrlAddCityWeather();
+    }
 
     var ctrlAddCityWeather = function(){
-        var city, input, keys;
+        var city, name, lon, lat, input, keys, unit;
 
         input = viewCtrl.getInput();
-        city = input.city;
+        city = getObjInArr(modelCtrl.getAllCities(), 'isCurrent', true); // Get the city obj which has it's isCurrent status set to true
+        name = city.name;
+        lat = city.lat;
+        lon = city.lon;
+
         keys = modelCtrl.getKeys();
-        
-    
-        if( city !== '' ){
+        units = modelCtrl.getSettings().unit;
 
-            $.get( `http://api.openweathermap.org/data/2.5/weather?q=${ city }&units=metric&APPID=${ keys.openWeather }`, function( data ) {
-    
-                let lon, lat, timestamp, currentTimeStamp, temp, sunrise, sunset, desc, weatherID, weatherIcon;
+        addCitiesToMenu();
 
-                console.log(data);
+        if( city ){
+
+            $.get( `http://api.openweathermap.org/data/2.5/weather?lat=${ lat }&lon=${ lon }&units=${units}&APPID=${ keys.openWeather }`, function( data ) {
+                
                 modelCtrl.setWeather(data);
-
-
+                
+                let timestamp, currentTimeStamp, temp, sunrise, sunset, desc, weatherID, weatherIcon;
+                
                 temp = data.main.temp;
                 desc = data.weather[0].description;
 
-                viewCtrl.displayCity(city);
+                viewCtrl.displayCity(name);
                 updateCurWeatherUI(temp, desc);
                 viewCtrl.hideShowCurWeather();
 
-    
-                lon = data.coord.lon;
-                lat = data.coord.lat;
                 timestamp = data.dt;
                 
                 currentTimeStamp = data.dt * 1000; // Multiply by 1000 to get current time
@@ -232,46 +347,43 @@ var weatherController = (function( modelCtrl, viewCtrl ){
 
                     locationTime = localTime.toLocaleString(DateTime.TIME_SIMPLE);
 
-                    //viewCtrl.displayTime(locationTime);
-
-                    $.get( `http://api.openweathermap.org/data/2.5/forecast?q=${ city }&units=metric&APPID=${ keys.openWeather }`, function( data ) {
-                        console.log(data);
+                    $.get( `http://api.openweathermap.org/data/2.5/forecast?lat=${ lat }&lon=${ lon }&units=${units}&APPID=${ keys.openWeather }`, function( data ) {
+                   
                         updateDaysNav(data, localTime.weekdayShort, timeZone);
                         viewCtrl.showDaysNav();
 
                         updateWeatherImage(weatherIcon, isNight);
-                        
+
+                        let weatherDays = modelCtrl.getWeatherDays();
         
-                    }).fail(function(){
-                        viewCtrl.displayError();
-                    });
+                    }).fail( viewCtrl.displayError() );
 
     
-                }).fail(function(){
-                    viewCtrl.displayError();
-                });
+                }).fail( viewCtrl.displayError() );
 
-            }).fail(function(){
-                viewCtrl.displayError();
-            });
+            }).fail( viewCtrl.displayError() );
         }
     };
+
+    var onGetWeather = function(){
+        ctrlAddCityWeather();
+
+
+    }
 
     var weatherDayClick = function(){
         let dayID, weather, icon, desc, temp, isNight;
         dayID = viewCtrl.addActiveClassToDaysNavDay($(this));
 
-        if(dayID === 0){
+        if(dayID === 0){ // if current day get weather data from current weather
             weather = modelCtrl.getWeather();
             icon = getWeatherAttr( weather.weather[0].id, 'icon' );
             temp = weather.main.temp;
             isNight = weather.isNight;
             desc = weather.weather[0].description;
 
-            
-        } else {
+        } else { // get weather from forecast
             weather = modelCtrl.getWeatherDays()[dayID];
-            console.log(weather);
             icon = weather.getMostFrequentWeather()[0];
             temp = weather.getMaxTemp();
             isNight = false;
@@ -280,21 +392,117 @@ var weatherController = (function( modelCtrl, viewCtrl ){
         }
         updateCurWeatherUI(temp, desc);
         updateWeatherImage(icon, isNight);
-    }
+    };
+
+
+    // var plotMinMaxTemp = function(data){
+
+    //     var stats = ['temp', 'pressure', 'humidity'];
+            
+
+    //     // set the dimensions and margins of the graph
+    //     var margin = {top: 20, right: 20, bottom: 30, left: 50},
+    //     width = 375 - margin.left - margin.right,
+    //     height = 150 - margin.top - margin.bottom;
+
+    //     // set the ranges
+    //     var x = d3.scaleTime().range([0, width]);
+    //     var y = d3.scaleLinear().range([height, 0]);
+
+    //     // define the line
+    //     var statline = d3.line()
+    //     .curve(d3.curveCardinal)
+    //     .x(function(d) { return x(d.date); })
+    //     .y(function(d) { return y(d.stat); });
+
+    //     // define the area
+    //     var area = d3.area()
+    //     .curve(d3.curveCardinal)
+    //     .x( function(d){ return x(d.date) } )
+    //     .y1( function(d){ return y(d.stat) } )
+    //     .y0(height);
+ 
+
+    //     function draw(data, stat) {
+    //         //console.log(data);
+        
+  
+    //         // format the data
+    //         data.forEach(function(d, i) {
+    //             d.date = d.dt * 1000;
+    //             d.stat = d.main[stat];
+    //         });
+
+    //         // append the svg obgect to the .weather-forecast__charts element
+    //         // appends a 'group' element to 'svg'
+    //         // moves the 'group' element to the top left margin
+    //         var svg = d3.select(".weather-forecast__charts").append("svg")
+    //         .attr("width", width + margin.left + margin.right)
+    //         .attr("height", height + margin.top + margin.bottom)
+    //         .append("g")
+    //         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    //         // Scale the range of the data
+    //         x.domain(d3.extent(data, function(d) { return d.date; }));
+    //         y.domain([d3.min(data, function(d) { return Math.min(d.stat) - (Math.min(d.stat) * .05) }), d3.max(data, function(d) { return Math.max(d.stat) + (Math.max(d.stat) * .05) })]);
+
+    //         var xAxis = d3.axisBottom(x).ticks(5).tickFormat(d3.timeFormat("%a"));
+    //         var yAxis = d3.axisLeft(y).ticks(5);
+
+    //         // Add the valueline path.
+    //         svg.append("path")
+    //         .data([data])
+    //         .attr("class", "line " + stat)
+    //         .attr("d", statline);
+
+    //         // append the area
+    //         svg.append("path")
+    //         .data([data])
+    //         .attr("class", "area " + stat)
+    //         .attr("d", area);
+    
+    //         // Add the X Axis
+    //         svg.append("g")
+    //         .attr("transform", "translate(0," + height + ")")
+    //         .call(xAxis);
+
+    //         // Add the Y Axis
+    //         svg.append("g")
+    //         .call(yAxis);
+    //     }
+
+    //     stats.forEach(el => draw(data, el));
+
+    // };
+
+
 
     var setupEventListeners = function(){
-        $( DOMStrings.curWeatherBtn ).on( 'click', ctrlAddCityWeather ); // Add event listener for the city search submit button
+        $( DOMStrings.curWeatherBtn ).on( 'click', onGetWeather ); // Add event listener for the city search submit button
         $(window).scroll( viewCtrl.setWindowScrollAnimation ); // Add listener to animate background on scroll
         $(DOMStrings.daysNavDay).on('click', weatherDayClick);
 
         clearInput(DOMStrings.curWeatherInput); // Add event listener for to clear the search input on focus
-        showSearch(); //Add event listener to show the search submit button
+        //showSearch(); //Add event listener to show the search submit button
+
+        $(DOMStrings.curWeatherInput).on('keyup', onSearchType);
+        getCity();
+
+        $(DOMStrings.mainMenuBtn).on('click', animateMainMenu);
+        $(DOMStrings.mainMenuListItem).on('click', showSubMenu);
+        $(DOMStrings.menuItemBack).on('click', hideSubMenu);
+        $(DOMStrings.radioInput).on('change', onRadioChange);
+        $(DOMStrings.addCityBtn).on('click', addNewCity);
+        $(DOMStrings.menuCitiesList).on('click', DOMStrings.menuCitiesCity, menuCityLoadWeather);
     };
+
+    
 
     return {
         init: function(){
             setupEventListeners();
             animatePlaceHolder();
+            setSettingsUnitsUI();
 
         }
     }

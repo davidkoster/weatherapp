@@ -1,5 +1,17 @@
 var weatherModelController = (function(){
 
+    var arrMap = function(fn, arr){
+        var newArr = [];
+
+        for(var i=0; i<arr.length; i++){
+            newArr[i] = fn(arr[i]);
+        }
+        return newArr;
+    };
+
+    var getIdFromObj = obj => obj.id;
+      
+
     let currentWeather, weatherConditions;
 
     var weatherCond = {
@@ -26,15 +38,28 @@ var weatherModelController = (function(){
     weatherConditions.set(weatherCond.snow, ['13', 'Snow']);
     weatherConditions.set(weatherCond.mist, ['50', 'Mist']);
 
+    let settings = {
+        unit: 'metric',
+        backdrop: 'mountain',
+    };
     
-
     const keys = {
         openWeather: 'b34e9c1fd875ac948d81551fd8bc6c02',
         google: 'AIzaSyCxRruRUdKgB4lFtfkq-hUHM6YeFoTOQ6U',
-    }
+    };
 
+    let cities = [];
     let weatherDays = [];
 
+    class City {
+        constructor(id, name, lon, lat){
+            this.id = id;
+            this.name = name;
+            this.lon = lon;
+            this.lat = lat;
+            this.isCurrent = true;
+        }
+    }
 
     class WeatherDay {
         constructor(day, weather, temp){
@@ -52,9 +77,6 @@ var weatherModelController = (function(){
 
         getMostFrequentWeather(){
 
-            //let result = null;
-
-            
             let maxCount = 0; // Counter of max element
             let freqObj = {}; // Frequency object to store key(name of element in arr) value(occurences of element in arr) pairs
             let freqEl; // Store the element that occurs most frequently
@@ -86,29 +108,18 @@ var weatherModelController = (function(){
 
             }
             // return the hight occuring element
-            console.log(freqEl);
+            //console.log(freqEl);
             return freqEl;
 
-
-            // var getWeatherAttr = function(id, type){
-            //     let weatherConditions = modelCtrl.getWeatherConditions();
-            //     let result = null;
-            //     for (var [key, value] of weatherConditions){
-            //         if(key.indexOf(id) !== -1){
-            //             if(type === 'icon'){
-            //                 result = value[0]; // iterate over the weather conditions map element and set the weather icon to its value
-            //             } else if(type === 'desc') {
-            //                 result = value[1];
-            //             }
-            //         }
-            //     }
-            //     return result; // returns weather icon code if found else returns null
-            // }
         }
 
     }
 
     return {
+        resetWeatherDays: function(){
+            weatherDays = [];
+        },
+
         addWeatherDay: function(day, temp, weather){
             let weatherDay = new WeatherDay(day, temp, weather);
             weatherDays.push(weatherDay);
@@ -138,7 +149,47 @@ var weatherModelController = (function(){
 
         getWeatherConditions: function(){
             return weatherConditions;
-        }
+        },
+
+        getSettings: function(){
+            return settings;
+        },
+
+        setSettings: function(prop, val){
+            settings[prop] = val;
+        },
+
+        clearInputVal: function(input){
+            $(input).val('');
+        },
+
+        addCity: function(id, city, lon, lat){
+            let newCity, cityIndex;
+            cityIndex = cities.findIndex(el => el.id === id);
+
+            if( cityIndex === -1 ){
+                newCity = new City(id, city, lon, lat);
+                cities.push(newCity)
+            }else{
+                newCity = cities[cityIndex];
+            }
+            //console.log(newCity);
+            return newCity;
+        },
+
+        getAllCities: function(){
+            return cities;
+        },
+
+        setCurrentCity: function(id){
+            for(var i=0; i<cities.length; i++){ // loop over and assign the current city to be 'current'
+            if(cities[i].id === id){
+                    cities[i].isCurrent = true;
+                } else {
+                    cities[i].isCurrent = false;
+                }
+            }
+        },
 
     }
 
