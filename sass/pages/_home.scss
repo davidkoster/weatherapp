@@ -1,3 +1,42 @@
+
+.header{
+    background-image: linear-gradient(to right, $primary-2, $primary-1);
+    color: #fff;
+    text-align: center;
+    padding: 2rem 10rem;
+    clip-path: polygon(0 0, 100% 0, calc(100% - 10rem) 100%, 10rem 100%);
+    &__main {
+        font-weight: 100;
+        font-size: 3rem;
+    }
+
+    &__sub {
+        font-weight: 300;
+        font-size: 1.5rem;
+    }
+}
+
+.info-section{
+    background-image: linear-gradient(to right, $primary-1, $primary-2);
+    color: #fff;
+    text-align: center;
+    padding: 2rem 10rem;
+    clip-path: polygon(10rem 0, calc(100% - 10rem) 0, 100% 100%, 0 100%);
+
+    &__header{ 
+        font-size: 2.5rem;
+        font-weight: 100;
+    }
+    &__text{
+        font-size: 1.4rem;
+        p{
+            &:not(:last-child){
+                margin-bottom: 1rem;
+            }
+        }
+    }
+}
+
 .phone-wrapper{
     background: url(../img/phone-mockup.svg) no-repeat center/contain;
     height: 875px;
