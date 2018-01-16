@@ -12,124 +12,125 @@
     <title>Weather App</title>
 </head>
 <body>
-    
-    <main class="main-wrapper">
-        <nav class="top-nav">
-            <button class="top-nav__button top-nav__menu-button">...</button>
-            <button class="top-nav__button top-nav__add-button">+</button>
-        </nav>
-        <div class="main-menu">
-            <div class="main-menu__inner">
-                <ul class="main-menu__list main-menu__main-list">
-                    <li class="main-menu__item" data-list="city">Cities</li>
-                    <li class="main-menu__item" data-list="settings">Settings</li>
-                    <li class="main-menu__item">Login</li>
-                </ul>
-                <ul class="main-menu__list main-menu__city-list main-menu__list--right" data-list="city">
-                    <li class="main-menu__item main-menu__item-back">&lsaquo;</li>
-                    <li class="main-menu__item main-menu__item-no-cities">No Cities Added</li>
+    <div class="phone-wrapper">
+        <main class="main-wrapper">
+            <nav class="top-nav">
+                <button class="top-nav__button top-nav__menu-button">...</button>
+                <button class="top-nav__button top-nav__add-button">+</button>
+            </nav>
+            <div class="main-menu">
+                <div class="main-menu__inner">
+                    <ul class="main-menu__list main-menu__main-list">
+                        <li class="main-menu__item" data-list="city">Cities</li>
+                        <li class="main-menu__item" data-list="settings">Settings</li>
+                        <li class="main-menu__item">Login</li>
+                    </ul>
+                    <ul class="main-menu__list main-menu__city-list main-menu__list--right" data-list="city">
+                        <li class="main-menu__item main-menu__item-back">&lsaquo;</li>
+                        <li class="main-menu__item main-menu__item-no-cities">No Cities Added</li>
 
-                </ul>
-                <ul class="main-menu__list main-menu__settings-list main-menu__list--right" data-list="settings">
-                    <li class="main-menu__item main-menu__item-back">&lsaquo;</li>
-                    <li class="main-menu__item">
-                        <span class="main-menu__title">Units:</span>
+                    </ul>
+                    <ul class="main-menu__list main-menu__settings-list main-menu__list--right" data-list="settings">
+                        <li class="main-menu__item main-menu__item-back">&lsaquo;</li>
+                        <li class="main-menu__item">
+                            <span class="main-menu__title">Units:</span>
 
-                        <div class="radio__box radio__box--metric">
-                            <input type="radio" name="units" id="units__metric" class="radio__input" value="metric"><label for="units__metric" class="radio__label radio__label--metric" data-unit="metric">Metric</label>
+                            <div class="radio__box radio__box--metric">
+                                <input type="radio" name="units" id="units__metric" class="radio__input" value="metric"><label for="units__metric" class="radio__label radio__label--metric" data-unit="metric">Metric</label>
+            
+                                <input type="radio" name="units" id="units__imperial" class="radio__input" value="imperial"><label for="units__imperial" class="radio__label radio__label--imperial" data-unit="imperial">Imperial</label>
+                                
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <section class="current-weather">
         
-                            <input type="radio" name="units" id="units__imperial" class="radio__input" value="imperial"><label for="units__imperial" class="radio__label radio__label--imperial" data-unit="imperial">Imperial</label>
-                            
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <section class="current-weather">
-    
-            <div class="current-weather__search active">
-                <input type="text" class="current-weather__input" placeholder="Type City">
-                <button class="current-weather__button">Search</button>
-            </div>
-
-            <div class="current-weather__text u-text-center">
-                <h2 class="heading-secondary">&nbsp;</h2>
-                <h3 class="heading-tertiary">&nbsp;</h3>
-                <h1 class="heading-primary">&nbsp;</h1>
-            </div>
-            <div class="current-weather__error u-margin-top-md">
-                <h3 class="heading-tertiary u-text-center">Sorry, an error occurred while getting your weather.</h3>
-            </div>
-            <div class="animation">
-
-                <div class="animation__weather"></div>
-                
-                <!-- <img src="img/animation/weather/raining.svg" alt="weather"> -->
-                <!-- <img class="animation__background" src="img/animation/houseandmountain.svg" alt="animation background"> -->
-
-                <div class="animation__background"></div>
-
-            </div>
-
-            <div class="day-navigation">
-                <div class="day-navigation__day day-navigation__day--current">
-                    <span class="day-navigation__text">tue</span>
-                    <div class="day-navigation__icon day-navigation__icon--01"></div> 
+                <div class="current-weather__search active">
+                    <input type="text" class="current-weather__input" placeholder="Type City">
+                    <button class="current-weather__button">Search</button>
                 </div>
-                <div class="day-navigation__day">
-                    <span class="day-navigation__text">wed</span>
-                    <div class="day-navigation__icon"></div>
-                </div>
-                <div class="day-navigation__day">
-                    <span class="day-navigation__text">thur</span>
-                    <div class="day-navigation__icon"></div>
-                </div>
-                <div class="day-navigation__day">
-                    <span class="day-navigation__text">fri</span>
-                    <div class="day-navigation__icon"></div>
-                </div>
-                <div class="day-navigation__day">
-                    <span class="day-navigation__text">sat</span>
-                    <div class="day-navigation__icon"></div>
-                </div>
-            </div>
 
-        </section>
-        <!-- <section class="weather-forecast">
+                <div class="current-weather__text u-text-center">
+                    <h2 class="heading-secondary">&nbsp;</h2>
+                    <h3 class="heading-tertiary">&nbsp;</h3>
+                    <h1 class="heading-primary">&nbsp;</h1>
+                </div>
+                <div class="current-weather__error u-margin-top-md">
+                    <h3 class="heading-tertiary u-text-center">Sorry, an error occurred while getting your weather.</h3>
+                </div>
+                <div class="animation">
 
-            <h3 class="heading-tertiary">Forecast</h3>
-            <div class="weather-forecast__charts"></div>
-            <!-- <div class="rain-chance">
-                <svg class="rain-chance__icon">
-                    <use xlink:href="img/sprite.svg#icon-rainy2"></use>
-                </svg>
-                <span class="rain-change__percent">10%</span>
-            </div>
-            <div class="sunrise-sunset">
-                <div class="sunrise-sunset__sunrise">
-                    <svg class="sunrise-sunset__icon--sunrise">
-                        <use xlink:href="img/sprite.svg#icon-sunrise"></use>
+                    <div class="animation__weather"></div>
+                    
+                    <!-- <img src="img/animation/weather/raining.svg" alt="weather"> -->
+                    <!-- <img class="animation__background" src="img/animation/houseandmountain.svg" alt="animation background"> -->
+
+                    <div class="animation__background"></div>
+
+                </div>
+
+                <div class="day-navigation">
+                    <div class="day-navigation__day day-navigation__day--current">
+                        <span class="day-navigation__text">tue</span>
+                        <div class="day-navigation__icon day-navigation__icon--01"></div> 
+                    </div>
+                    <div class="day-navigation__day">
+                        <span class="day-navigation__text">wed</span>
+                        <div class="day-navigation__icon"></div>
+                    </div>
+                    <div class="day-navigation__day">
+                        <span class="day-navigation__text">thur</span>
+                        <div class="day-navigation__icon"></div>
+                    </div>
+                    <div class="day-navigation__day">
+                        <span class="day-navigation__text">fri</span>
+                        <div class="day-navigation__icon"></div>
+                    </div>
+                    <div class="day-navigation__day">
+                        <span class="day-navigation__text">sat</span>
+                        <div class="day-navigation__icon"></div>
+                    </div>
+                </div>
+
+            </section>
+            <!-- <section class="weather-forecast">
+
+                <h3 class="heading-tertiary">Forecast</h3>
+                <div class="weather-forecast__charts"></div>
+                <!-- <div class="rain-chance">
+                    <svg class="rain-chance__icon">
+                        <use xlink:href="img/sprite.svg#icon-rainy2"></use>
                     </svg>
-                    <div class="sunrise-sunset__text--sunrise">6:36am</div>
+                    <span class="rain-change__percent">10%</span>
                 </div>
-                <div class="sunrise-sunset__sunset">
-                    <svg class="sunrise-sunset__icon--sunset">
-                        <use xlink:href="img/sprite.svg#icon-sunrise"></use>
+                <div class="sunrise-sunset">
+                    <div class="sunrise-sunset__sunrise">
+                        <svg class="sunrise-sunset__icon--sunrise">
+                            <use xlink:href="img/sprite.svg#icon-sunrise"></use>
+                        </svg>
+                        <div class="sunrise-sunset__text--sunrise">6:36am</div>
+                    </div>
+                    <div class="sunrise-sunset__sunset">
+                        <svg class="sunrise-sunset__icon--sunset">
+                            <use xlink:href="img/sprite.svg#icon-sunrise"></use>
+                        </svg>
+                        <div class="sunrise-sunset__text--sunset">7:28pm</div>
+                    </div>
+                </div>
+                <div class="wind">
+                    <svg class="wind__icon">
+                        <use xlink:href="img/sprite.svg#icon-wind"></use>
                     </svg>
-                    <div class="sunrise-sunset__text--sunset">7:28pm</div>
+                    <span class="wind__speed">10km/h</span>
+                    <span class="wind__direction">N/E</span>
                 </div>
-            </div>
-            <div class="wind">
-                <svg class="wind__icon">
-                    <use xlink:href="img/sprite.svg#icon-wind"></use>
-                </svg>
-                <span class="wind__speed">10km/h</span>
-                <span class="wind__direction">N/E</span>
-            </div>
 
-        </section> -->
+            </section> -->
 
-    </main>
+        </main>
+    </div>
 
     <script src="js/vendors/jquery.min.js"></script>
     <script src="js/vendors/jquery.alterclass.js"></script>

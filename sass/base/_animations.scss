@@ -1,7 +1,7 @@
 @keyframes clearAnimation {
     0% {
         z-index: -1;
-        transform: translateY(70vh);
+        transform: translateY(400px);
     }
     99% {
         z-index: -1; 
@@ -15,7 +15,7 @@
 
 @keyframes moveLeft {
     0% {
-        transform: translateX(70vw);
+        transform: translateX(300px);
     }
     100% {
         transform: translateX(0);
@@ -24,15 +24,12 @@
 
 @keyframes moveRight {
     0% {
-        transform: translateX(-70vw);
+        transform: translateX(-300px);
     }
     100% {
         transform: translateX(0);
     }
 }
-
-
-
 
 
 

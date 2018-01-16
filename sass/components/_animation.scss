@@ -3,7 +3,7 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 63vh;
+    height: 63%;
     z-index: 5;
 
     &__weather {
@@ -31,12 +31,12 @@
                 animation-fill-mode: forwards;
             }
             >g:nth-child(2) >g >path{
-                transform: translateX(-70vw);
+                transform: translateX(-300px);
                 animation: moveRight 1s ease-out;
                 animation-fill-mode: forwards;
             }
             >g:nth-child(3) >g >path{
-                transform: translateX(70vw);
+                transform: translateX(300px);
                 animation: moveLeft 1s ease-out;
                 animation-fill-mode: forwards;
             }
@@ -51,17 +51,17 @@
                 animation-fill-mode: forwards;
             }
             >g:nth-child(2) >g >path{
-                transform: translateX(-70vw);
+                transform: translateX(-300px);
                 animation: moveRight 1s ease-out;
                 animation-fill-mode: forwards;
             }
             >g:nth-child(3) >g >path{
-                transform: translateX(70vw);
+                transform: translateX(300px);
                 animation: moveLeft 1s ease-out;
                 animation-fill-mode: forwards;
             }
             >g:nth-child(4) >g >path{
-                transform: translateX(70vw);
+                transform: translateX(300px);
                 animation: moveLeft 1s .3s ease-out;
                 animation-fill-mode: forwards;
             }
@@ -71,17 +71,17 @@
     &__weather--animate-04d, &__weather--animate-04n{
         #Weather-App >g {
             >g:nth-child(1) >g >path{
-                transform: translateX(-70vw);
+                transform: translateX(-300px);
                 animation: moveRight 1s ease-out;
                 animation-fill-mode: forwards;
             }
             >g:nth-child(2) >g >path{
-                transform: translateX(70vw);
+                transform: translateX(300px);
                 animation: moveLeft 1s ease-out;
                 animation-fill-mode: forwards;
             }
             >g:nth-child(3) >g >path{
-                transform: translateX(70vw);
+                transform: translateX(300px);
                 animation: moveLeft 1s .3s ease-out;
                 animation-fill-mode: forwards;
             }
@@ -115,17 +115,17 @@
                 }
             }
             >g:nth-child(3) >g >path{
-                transform: translateX(-70vw);
+                transform: translateX(-300px);
                 animation: moveRight 1s ease-out;
                 animation-fill-mode: forwards;
             }
             >g:nth-child(4) >g >path{
-                transform: translateX(70vw);
+                transform: translateX(300px);
                 animation: moveLeft 1s ease-out;
                 animation-fill-mode: forwards;
             }
             >g:nth-child(5) >g >path{
-                transform: translateX(70vw);
+                transform: translateX(300px);
                 animation: moveLeft 1s .3s ease-out;
                 animation-fill-mode: forwards;
             }
@@ -160,17 +160,17 @@
                 }
             }
             >g:nth-child(3) >g >path{
-                transform: translateX(-70vw);
+                transform: translateX(-300px);
                 animation: moveRight 1s ease-out;
                 animation-fill-mode: forwards;
             }
             >g:nth-child(4) >g >path{
-                transform: translateX(70vw);
+                transform: translateX(300px);
                 animation: moveLeft 1s ease-out;
                 animation-fill-mode: forwards;
             }
             >g:nth-child(5) >g >path{
-                transform: translateX(70vw);
+                transform: translateX(300px);
                 animation: moveLeft 1s .3s ease-out;
                 animation-fill-mode: forwards;
             }
@@ -192,17 +192,17 @@
                 animation-fill-mode: forwards;
             }
             >g:nth-child(3) >g >path{
-                transform: translateX(-70vw);
+                transform: translateX(-300px);
                 animation: moveRight 1s ease-out;
                 animation-fill-mode: forwards;
             }
             >g:nth-child(4) >g >path{
-                transform: translateX(70vw);
+                transform: translateX(300px);
                 animation: moveLeft 1s ease-out;
                 animation-fill-mode: forwards;
             }
             >g:nth-child(5) >g >path{
-                transform: translateX(70vw);
+                transform: translateX(300px);
                 animation: moveLeft 1s .3s ease-out;
                 animation-fill-mode: forwards;
             }
@@ -210,20 +210,20 @@
     }
 
     &__weather--animate-50d, &__weather--animate-50n {
-        padding-top: 30vh;
+        padding-top: 30%;
         #Weather-App >g {
             >g:nth-child(1) >g >path{
-                transform: translateX(-70vw);
+                transform: translateX(-300px);
                 animation: moveRight 1s ease-out;
                 animation-fill-mode: forwards;
             }
             >g:nth-child(2) >g >path{
-                transform: translateX(70vw);
+                transform: translateX(300px);
                 animation: moveLeft 1s ease-out;
                 animation-fill-mode: forwards;
             }
             >g:nth-child(3) >g >path{
-                transform: translateX(70vw);
+                transform: translateX(300px);
                 animation: moveLeft 1s .3s ease-out;
                 animation-fill-mode: forwards;
             }
