@@ -109,7 +109,10 @@ var weatherController = (function( modelCtrl, viewCtrl ){
     var onRadioChange = function(){
         let units = $( `${DOMStrings.unitsInput}:checked`).val();
         modelCtrl.setSettings('unit', units);
-        ctrlAddCityWeather();
+        
+        if(modelCtrl.getWeather() !== undefined){
+            ctrlAddCityWeather();
+        }
     }
 
 
@@ -479,7 +482,7 @@ var weatherController = (function( modelCtrl, viewCtrl ){
 
     var setupEventListeners = function(){
         $( DOMStrings.curWeatherBtn ).on( 'click', onGetWeather ); // Add event listener for the city search submit button
-        $(window).scroll( viewCtrl.setWindowScrollAnimation ); // Add listener to animate background on scroll
+        //$(window).scroll( viewCtrl.setWindowScrollAnimation ); // Add listener to animate background on scroll
         $(DOMStrings.daysNavDay).on('click', weatherDayClick);
 
         clearInput(DOMStrings.curWeatherInput); // Add event listener for to clear the search input on focus
