@@ -120,8 +120,6 @@ var weatherController = (function( modelCtrl, viewCtrl ){
         let val = $( `${DOMStrings.radioInput}[name=${prop}]:checked`).val();
         modelCtrl.setSettings(prop, val);
 
-        console.log(modelCtrl.getSettings());
-
         if(prop === 'theme'){
             viewCtrl.setTheme(val);
         }
