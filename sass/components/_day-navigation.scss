@@ -34,18 +34,41 @@
         align-items: center;
         justify-content: center;
         padding-bottom: 1rem;
-        &:not(:last-child){
-            //border-right: 1px solid currentColor;
+        cursor: pointer;
+        position: relative;
+        transition: all .5s;
+        
+        &:before{
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background-image: linear-gradient(to right, #5677AF, #7193C8);
+            z-index: 1;
+            transform: scaleY(0) scaleZ(1);
+            transform-origin: bottom;
+            transition: all .2s ease-out;
+            backface-visibility: hidden;
+            
         }
 
         &--current {
-            background-image: linear-gradient(to right, $primary-2, $primary-3);
-            color: $grey-light-2
+            color: $grey-light-2;
+            
+            &:before{
+                transform: scaleY(1) scaleZ(1);
+            }
+            
+            
         }
     }
 
     &__text {
-
+        position: relative;
+        z-index: 5;
     }
 
     &__icon {
@@ -54,6 +77,8 @@
         display: inline-block;
         background-size: contain;
         background-repeat: no-repeat;
+        position: relative;
+        z-index: 5;
         
         &--01 {
             background-image:url( ../img/animation/weather/icon-01.svg );

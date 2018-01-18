@@ -39,11 +39,19 @@
                         <li class="main-menu__item">
                             <span class="main-menu__title">Units:</span>
 
-                            <div class="radio__box radio__box--metric">
+                            <div class="radio__box">
                                 <input type="radio" name="units" id="units__metric" class="radio__input" value="metric"><label for="units__metric" class="radio__label radio__label--metric" data-unit="metric">Metric</label>
             
                                 <input type="radio" name="units" id="units__imperial" class="radio__input" value="imperial"><label for="units__imperial" class="radio__label radio__label--imperial" data-unit="imperial">Imperial</label>
-                                
+                            </div>
+                        </li>
+                        <li class="main-menu__item">
+                            <span class="main-menu__title">Theme:</span>
+
+                            <div class="radio__box radio__box--block">
+                                <input type="radio" name="theme" id="theme__mountain" class="radio__input" value="mountain"><label for="theme__mountain" class="radio__label radio__label--mountain" data-unit="mountain">Mountain</label>
+            
+                                <input type="radio" name="theme" id="theme__ocean" class="radio__input" value="ocean"><label for="theme__ocean" class="radio__label radio__label--ocean" data-unit="ocean">Ocean</label>
                             </div>
                         </li>
                     </ul>
@@ -57,12 +65,13 @@
                 </div>
 
                 <div class="current-weather__text u-text-center">
-                    <h2 class="heading-secondary">&nbsp;</h2>
-                    <h3 class="heading-tertiary">&nbsp;</h3>
-                    <h1 class="heading-primary">&nbsp;</h1>
+                    <h2 class="current-weather__city heading-secondary">&nbsp;</h2>
+                    <h3 class="current-weather__desc heading-tertiary">&nbsp;</h3>
+                    <h1 class="current-weather__temp heading-primary">&nbsp;</h1>
                 </div>
                 <div class="current-weather__error u-margin-top-md">
-                    <h3 class="heading-tertiary u-text-center">Sorry, an error occurred while getting your weather.</h3>
+                    <h3 class="current-weather__error-message current-weather__error-message--general heading-tertiary u-text-center">Sorry, an error occurred while getting your weather.</h3>
+                    <h3 class="current-weather__error-message current-weather__error-message--city heading-tertiary u-text-center">Please select a location from the options when typing.</h3>
                 </div>
                 <div class="animation">
 
@@ -71,7 +80,7 @@
                     <!-- <img src="img/animation/weather/raining.svg" alt="weather"> -->
                     <!-- <img class="animation__background" src="img/animation/houseandmountain.svg" alt="animation background"> -->
 
-                    <div class="animation__background"></div>
+                    <div class="animation__background animation__background--bg-mountain"></div>
 
                 </div>
 
@@ -138,8 +147,8 @@
     <section class="info-section">
         <h3 class="info-section__header">About Weathered</h3>
         <div class="info-section__text">
-            <p>Weathered is a weather app designed to effectively show the weather in an interactive and fun way. The app was built as a personal project to practice and showcase my front-end dev skills. The App was built using ES6, Jquery, HTML and SASS. I used the BEM methodology for structuring my HTML and CSS. A simple MVC model pattern was used to the Javascript.</p>
-            <p>Note: there is currently no backend functionality, but a plan on adding this at some stage in the future.</p>
+            <p>Weathered is a weather app designed to effectively show the weather in an interactive and fun way. The app was built as a personal project to practice and showcase my front-end dev skills. The App was built using ES6, jQuery, HTML and SASS. I used the BEM methodology for structuring my HTML and CSS. A simple MVC model pattern was used to structure the application.</p>
+            <p>Note: there is currently no backend functionality, but I plan on adding this sometime in the near future.</p>
         </div>
     </section>
 

@@ -86,8 +86,16 @@ var weatherController = (function( modelCtrl, viewCtrl ){
     };
 
     var setSettingsUnitsUI = function(){
-        let unit = modelCtrl.getSettings().unit;
-        $('#units__' + unit).prop("checked", true);
+        const settings = modelCtrl.getSettings();
+        let theme = modelCtrl.getSettings().theme;
+        
+        for(var p in settings){
+            if(settings.hasOwnProperty(p)){
+                $(`#${p}__${settings[p]}`).prop("checked", true);
+            }
+        }
+        viewCtrl.setTheme(theme);
+
     };
 
     var animatePlaceHolder =  function() {
@@ -107,8 +115,16 @@ var weatherController = (function( modelCtrl, viewCtrl ){
     }
 
     var onRadioChange = function(){
-        let units = $( `${DOMStrings.unitsInput}:checked`).val();
-        modelCtrl.setSettings('unit', units);
+
+        const prop = $(this).attr('name');
+        let val = $( `${DOMStrings.radioInput}[name=${prop}]:checked`).val();
+        modelCtrl.setSettings(prop, val);
+
+        console.log(modelCtrl.getSettings());
+
+        if(prop === 'theme'){
+            viewCtrl.setTheme(val);
+        }
         
         if(modelCtrl.getWeather() !== undefined){
             ctrlAddCityWeather();
@@ -141,7 +157,8 @@ var weatherController = (function( modelCtrl, viewCtrl ){
 
     // Updates the text UI elements for current weather
     var updateCurWeatherUI = function(temp, desc){
-        viewCtrl.displayTemp(temp);
+        const units = modelCtrl.getSettings().units;
+        viewCtrl.displayTemp(temp, units);
         viewCtrl.displayDesc(desc);
     }
 
@@ -245,23 +262,30 @@ var weatherController = (function( modelCtrl, viewCtrl ){
         function cityAutocomplete(){
             let place = autocomplete.getPlace(); //Get the place object
 
-            let city, lon, lat;
-            city = place.address_components[0].long_name;
-            lon = place.geometry.location.lng();
-            lat = place.geometry.location.lat();
-            id = place.id;
+            if(place.address_components){
+                viewCtrl.hideError();
 
-            let newCity = modelCtrl.addCity(id, city, lon, lat); // Create new city obj and assign id(google place id), city(short name), lon and lat
-            
-            modelCtrl.setCurrentCity(id); //set current city to 'current'
+                let city, lon, lat;
+                city = place.address_components[0].long_name;
+                lon = place.geometry.location.lng();
+                lat = place.geometry.location.lat();
+                id = place.id;
 
+                let newCity = modelCtrl.addCity(id, city, lon, lat); // Create new city obj and assign id(google place id), city(short name), lon and lat
+                
+                modelCtrl.setCurrentCity(id); //set current city to 'current'
+
+                viewCtrl.showSearch($(this)); // Show the search submit button
+            } else {
+                let showError = viewCtrl.displayError('city');
+                showError();
+            }
         }
-
     }
 
-    var onSearchType = function(){
-        viewCtrl.showSearch($(this)); // Show the search submit button on keyup if there is text in the search input
-    }
+    // var onSearchType = function(){
+    //     viewCtrl.showSearch($(this)); // Show the search submit button on keyup if there is text in the search input
+    // }
 
     var addCitiesToMenu = function(){
         
@@ -284,6 +308,8 @@ var weatherController = (function( modelCtrl, viewCtrl ){
     }
 
     var ctrlAddCityWeather = function(){
+        viewCtrl.hideError();
+
         var city, name, lon, lat, input, keys, unit;
 
         input = viewCtrl.getInput();
@@ -293,7 +319,7 @@ var weatherController = (function( modelCtrl, viewCtrl ){
         lon = city.lon;
 
         keys = modelCtrl.getKeys();
-        units = modelCtrl.getSettings().unit;
+        units = modelCtrl.getSettings().units;
 
         addCitiesToMenu();
 
@@ -360,7 +386,6 @@ var weatherController = (function( modelCtrl, viewCtrl ){
                         let weatherDays = modelCtrl.getWeatherDays();
         
                     }).fail( viewCtrl.displayError() );
-
     
                 }).fail( viewCtrl.displayError() );
 
@@ -370,8 +395,6 @@ var weatherController = (function( modelCtrl, viewCtrl ){
 
     var onGetWeather = function(){
         ctrlAddCityWeather();
-
-
     }
 
     var weatherDayClick = function(){
@@ -488,7 +511,7 @@ var weatherController = (function( modelCtrl, viewCtrl ){
         clearInput(DOMStrings.curWeatherInput); // Add event listener for to clear the search input on focus
         //showSearch(); //Add event listener to show the search submit button
 
-        $(DOMStrings.curWeatherInput).on('keyup', onSearchType);
+        //$(DOMStrings.curWeatherInput).on('keyup', onSearchType);
         getCity();
 
         $(DOMStrings.mainMenuBtn).on('click', animateMainMenu);

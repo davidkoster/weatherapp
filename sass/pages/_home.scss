@@ -39,20 +39,21 @@
 
 .phone-wrapper{
     background: url(../img/phone-mockup.svg) no-repeat center/contain;
-    height: 875px;
-    width: 431px;
+    height: 600px;
+    width: 295.5px;
     margin: 5rem auto;
     display: flex;
     justify-content: center;
-    padding: 103px 0;
+    //padding: 103px 0;
+    
 }
 
 .main-wrapper{
     position: relative;
-    height: 667px;
-    width: 375px;
+    height: 76.3%;
+    width: 86.6%;
     overflow: hidden;
-
+    margin-top: 23.7%;
     //padding: 50px 30px;
 }
 
@@ -147,6 +148,7 @@
         //box-shadow: 0 2px 3rem rgba(0,0,0,.05);
         border-radius: 4px;
         transform: translateY(1rem);
+        cursor: pointer;
         &:focus {
             outline: none;
         }
@@ -168,8 +170,23 @@
             visibility: visible;
         }
     }
+    
+    &__desc {
+        text-transform: capitalize;
+    }
+
     &__error {
         display: none;
+        &--active {
+            display: block;
+        }
+
+    }
+    &__error-message{
+        display: none;
+        &--active {
+            display: block;
+        }
     }
 }
 

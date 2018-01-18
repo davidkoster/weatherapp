@@ -14,6 +14,7 @@ var weatherViewController = (function(){
         curTimeText: '.current-weather__text .heading-tertiary',
 
         ErrorBlock: '.current-weather__error',
+        ErrorMessage: '.current-weather__error-message',
 
         curWeatherBackground: '.animation__background',
         curWeatherDet: '.weather-forecast',
@@ -91,15 +92,19 @@ var weatherViewController = (function(){
             $(DOMStrings.curCityText).text(city);
         },
 
-        displayTemp: function(temp){
-            $(DOMStrings.curTempText).html( Math.round(temp) + '&deg;c' );
+        displayTemp: function(temp, units){
+            let symbol = 'c';
+            if(units === 'imperial'){
+                symbol = 'f';
+            }
+            $(DOMStrings.curTempText).html( Math.round(temp) + '&deg;' + symbol );
         },
 
         displayDesc: function(desc){
             $(DOMStrings.curTimeText).text( desc );
         },
 
-        displayError: function(){
+        displayError: function(type = 'general'){
             return function(){
                 // Hide input
                 $(DOMStrings.curWeatherSearchWrap).addClass('active');
@@ -108,8 +113,16 @@ var weatherViewController = (function(){
                 $(DOMStrings.curWeatherWrap).removeClass('active');
                 $(DOMStrings.curWeatherDet).hide();
 
-                $(DOMStrings.ErrorBlock).show();
+                $(DOMStrings.ErrorBlock).addClass(removeFirstChar(`${DOMStrings.ErrorBlock}--active`));
+                
+                $(DOMStrings.ErrorMessage).removeClass(removeFirstChar(`${DOMStrings.ErrorMessage}--active`));
+                $(`${DOMStrings.ErrorMessage}--${type}`).addClass(removeFirstChar(`${DOMStrings.ErrorMessage}--active`));
             }    
+        },
+
+        hideError: function(){
+            $(DOMStrings.ErrorBlock).removeClass(removeFirstChar(`${DOMStrings.ErrorBlock}--active`));         
+            $(DOMStrings.ErrorMessage).removeClass(removeFirstChar(`${DOMStrings.ErrorMessage}--active`));
         },
 
         setWindowScrollAnimation: function(){
@@ -134,12 +147,8 @@ var weatherViewController = (function(){
         
         },
 
-        showSearch: function(el){
-            if(el.val() !== ''){
-                $(DOMStrings.curWeatherBtn).addClass('active');
-            } else {
-                $(DOMStrings.curWeatherBtn).removeClass('active');
-            }
+        showSearch: function(){
+            $(DOMStrings.curWeatherBtn).addClass('active');
         },
 
         clearInput: function(){
@@ -248,6 +257,10 @@ var weatherViewController = (function(){
 
         getCityId: function(el){
             return el.data('id');
+        },
+
+        setTheme: function(theme){
+            $(DOMStrings.curWeatherBackground).alterClass(removeFirstChar(`${DOMStrings.curWeatherBackground}--bg-*`), removeFirstChar(`${DOMStrings.curWeatherBackground}--bg-${theme}`));
         }
 
         

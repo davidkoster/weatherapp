@@ -13,6 +13,7 @@
 
         svg {
             width: 100%;
+            margin-top: 4%;
         }
 
 
@@ -20,10 +21,21 @@
 
     &__weather--animate-01d, &__weather--animate-01n {
         animation: clearAnimation 1s cubic-bezier(.17,.67,.34,1.18);
-        animation-fill-mode: backwards;   
+        animation-fill-mode: backwards;
+        >svg{
+            height: 22%;
+            margin-top: 8%;
+        }
+    }
+
+    &__weather--animate-01n >svg{
+        height: 20%;
     }
 
     &__weather--animate-02d, &__weather--animate-02n{
+        >svg{
+            height: 28%;
+        }
         #Weather-App >g {
             >g:nth-child(1) >g{
                 opacity: 0;
@@ -44,6 +56,9 @@
     }
 
     &__weather--animate-03d, &__weather--animate-03n{
+        >svg{
+            height: 28%;
+        }
         #Weather-App >g {
             >g:nth-child(1) >g{
                 opacity: 0;
@@ -69,6 +84,9 @@
     }
 
     &__weather--animate-04d, &__weather--animate-04n{
+        >svg{
+            height: 28%;
+        }
         #Weather-App >g {
             >g:nth-child(1) >g >path{
                 transform: translateX(-300px);
@@ -89,6 +107,9 @@
     }
 
     &__weather--animate-09d, &__weather--animate-09n {
+        >svg{
+            height: 35%;
+        }
         #Weather-App >g {
             >g:nth-child(1) >g{
                 opacity: 0;
@@ -134,6 +155,9 @@
 
 
     &__weather--animate-10d, &__weather--animate-10n, &__weather--animate-13d, &__weather--animate-13n {
+        >svg{
+            height: 35%;
+        }
         #Weather-App >g {
             >g:nth-child(1) >g >g{
                 opacity: 0;
@@ -178,6 +202,9 @@
     }
 
     &__weather--animate-11d, &__weather--animate-11n {
+        >svg{
+            height: 35%;
+        }
         #Weather-App >g {
             >g:nth-child(1){
                 opacity: 0;
@@ -210,7 +237,10 @@
     }
 
     &__weather--animate-50d, &__weather--animate-50n {
-        padding-top: 30%;
+        padding-top: 50%;
+        >svg{
+            height: 28%;
+        }
         #Weather-App >g {
             >g:nth-child(1) >g >path{
                 transform: translateX(-300px);
@@ -237,8 +267,19 @@
         bottom: 0;
         background: url(../img/animation/houseandmountain.svg) no-repeat center 100%;
 
-        &--night{
-            background-image: url(../img/animation/houseandmountain-n.svg);
+        background: url(../img/animation/houseandmountain.svg) no-repeat center bottom / contain;
+
+        &--bg-ocean {
+            background-image: url(../img/animation/boat-bg.svg);
+        }
+
+        &--bg-mountain {
+            background-image: url(../img/animation/houseandmountain.svg);
         }
     }
+
+    &__background--bg-mountain.animation__background--night {
+        background-image: url(../img/animation/houseandmountain-n.svg);
+    }
+
 }

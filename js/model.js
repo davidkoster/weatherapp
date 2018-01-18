@@ -39,8 +39,8 @@ var weatherModelController = (function(){
     weatherConditions.set(weatherCond.mist, ['50', 'Mist']);
 
     let settings = {
-        unit: 'metric',
-        backdrop: 'mountain',
+        units: 'metric',
+        theme: 'mountain',
     };
     
     const keys = {

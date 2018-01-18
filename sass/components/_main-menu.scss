@@ -58,9 +58,13 @@
         color: $grey-light-1;
         font-weight: 100;
         padding: 1rem 3rem;
+        cursor: pointer;
         
         &:not(:last-child){
             border-bottom: 1px solid rgba($grey-light-1, .2);
+        }
+        &-no-cities {
+            cursor: default;
         }
     }
 }
